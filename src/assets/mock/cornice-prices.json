@@ -1,0 +1,16 @@
+[
+  {
+    "id": "72770119-e7ec-4aad-b3a4-09ae23e7ecee",
+    "typeRing": {
+      "id": "88853be4-0f9d-4138-88f8-8c4ebff8956d",
+      "value": "Простое"
+    },
+    "long": {
+      "id": "f384e97b-7ca5-4f7e-97c3-3a1ddcdd70d8",
+      "value": 1.6
+    },
+    "price": 56.48,
+    "count": 3,
+    "avatar": null
+  }
+]

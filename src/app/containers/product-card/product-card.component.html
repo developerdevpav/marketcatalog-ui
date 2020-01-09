@@ -1,0 +1,7 @@
+<mat-card class="card" *ngIf="key" [ngStyle]="{'width': width, 'height': height}">
+  <mat-card-title class="card__title">{{title}}</mat-card-title>
+  <img mat-card-image [src]="avatarURL" alt="Photo of a Shiba Inu">
+  <mat-card-actions align="center">
+    <button mat-button (click)="handleActionBtn()">{{titleActionBtn}}</button>
+  </mat-card-actions>
+</mat-card>

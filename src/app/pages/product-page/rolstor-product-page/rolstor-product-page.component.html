@@ -1,0 +1,5 @@
+<flex-catalog [products]="(rolstors$ | async)"
+              (eventPageChange)="handleChangePage($event)"
+              [pageSize]="size"
+              [length]="300">
+</flex-catalog>
