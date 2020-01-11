@@ -2,6 +2,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  box-sizing: content-box;
+
+  margin: auto 100px;
 
   &__content {
     flex-basis: 100%;

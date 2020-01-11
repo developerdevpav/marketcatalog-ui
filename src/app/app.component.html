@@ -16,8 +16,9 @@
     <div class="catalog-product-menu" *ngIf="extensionMenu">
       <div class="catalog-product-menu__category" >
         <ul>
-          <li *ngFor="let category of (getParentCategory() | async)" (mouseover)="handleMouseOver(category.id)">
-            <div [ngClass]="{'isActive': activeMenuItem === category.id}">
+          <li *ngFor="let category of (getParentCategory() | async)"
+              (mouseover)="handleMouseOver(category.id)" (click)="handleClickCategory(category)">
+            <div [routerLink]="'product/' + category.systemName" [ngClass]="{'isActive': activeMenuItem === category.id}">
               {{category.title}}
             </div>
           </li>

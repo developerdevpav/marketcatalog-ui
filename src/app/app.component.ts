@@ -77,4 +77,8 @@ export class AppComponent implements OnInit {
   handleMouseOver(id: string) {
     this.activeMenuItem = id;
   }
+
+  handleClickCategory(category: ProductCategory) {
+    this.extensionMenu = false;
+  }
 }
