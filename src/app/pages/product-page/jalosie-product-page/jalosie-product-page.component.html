@@ -1,0 +1,6 @@
+<flex-catalog [products]="(products | async)"
+              (eventPageChange)="handleChangePage($event)"
+              [pageSize]="pageConf.size"
+              [length]="300">
+</flex-catalog>
+

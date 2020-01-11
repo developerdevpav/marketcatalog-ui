@@ -1,0 +1,21 @@
+.flex-catalog {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-sizing: content-box;
+
+  margin: auto 100px;
+
+  &__content {
+    flex-basis: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
+  }
+
+  &__pagination {
+    flex-basis: 100%;
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+}

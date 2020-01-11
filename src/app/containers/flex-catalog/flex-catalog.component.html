@@ -1,0 +1,17 @@
+<div class="flex-catalog container">
+  <div class="flex-catalog__pagination">
+    <pagination [size]="pageSize" [length]="length" (eventPageChange)="handleChangePage($event)"></pagination>
+  </div>
+  <div class="flex-catalog__content">
+    <product-card *ngFor="let item of products"
+                  [key]="item.id"
+                  [avatarURL]="item.img"
+                  [title]="item.title"
+                  [titleActionBtn]="'Подробнее'">
+    </product-card>
+  </div>
+  <div class="flex-catalog__pagination">
+    <pagination [size]="pageSize" [length]="length" (eventPageChange)="handleChangePage($event)"></pagination>
+  </div>
+
+</div>
