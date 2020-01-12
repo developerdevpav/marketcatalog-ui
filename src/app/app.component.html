@@ -1,6 +1,6 @@
 <div class="wrapper">
   <header class="header">
-    <div class="header-top" [ngClass]="{'isFlow': isFlowTopHeader}">
+    <div class="header-top container" [ngClass]="{'isFlow': isFlowTopHeader}">
       <div class="header-top__left-menu">
         <a (click)="handleExtensionMenu()" routerLinkActive="isActive">Каталог товаров
           <mat-icon>{{extensionMenu ? 'clear' : 'list'}}</mat-icon>

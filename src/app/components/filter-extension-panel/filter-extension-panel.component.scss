@@ -1,0 +1,37 @@
+.extension-panel {
+  cursor: pointer;
+  width: 100%;
+
+  &__header-icon {
+    color: #3e2d8f;
+  }
+
+  &__header {
+    font-family: Circe, sans-serif;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.556;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    // padding: 0 10px 0 10px;
+    box-sizing: border-box;
+
+    span {
+      font-size: 28px;
+    }
+
+    &:hover .extension-panel__header-icon {
+      color: #4f3ec1;
+    }
+  }
+
+  &__body {
+    overflow: hidden;
+    padding: 0 10px 0 10px;
+  }
+
+}

@@ -14,6 +14,7 @@ import {
   MatPaginatorIntl,
   MatPaginatorModule,
   MatProgressBarModule,
+  MatProgressSpinnerModule,
   MatSelectModule,
   MatSnackBarModule,
   MatTabsModule
@@ -56,7 +57,8 @@ export class MatPaginatorIntlCro extends MatPaginatorIntl {
     MatSnackBarModule,
     MatMenuModule,
     AngularSvgIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatProgressBarModule,
@@ -74,7 +76,8 @@ export class MatPaginatorIntlCro extends MatPaginatorIntl {
     MatSnackBarModule,
     MatMenuModule,
     AngularSvgIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: MatPaginatorIntlCro }

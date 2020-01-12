@@ -6,11 +6,32 @@
 
   margin: auto 100px;
 
+  &__header {
+    display: flex;
+    padding: 0 15px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    margin-bottom: 30px;
+    background: white;
+    z-index: 1000;
+
+    &.is-active {
+      box-shadow: 0 3px 2px -2px rgba(0, 0, 0, 0.1);
+    }
+  }
+
   &__content {
     flex-basis: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 15px;
+  }
+
+  &__loader {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
   }
 
   &__pagination {

@@ -1,0 +1,9 @@
+<div class="extension-panel">
+  <div class="extension-panel__header" (click)="handleState()">
+    <span>{{title}}</span>
+    <mat-icon class="extension-panel__header-icon" svgIcon="filter-icon"></mat-icon>
+  </div>
+  <div class="extension-panel__body" [@extension]="state">
+    <ng-content></ng-content>
+  </div>
+</div>

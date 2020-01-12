@@ -49,6 +49,9 @@ export class AppComponent implements OnInit {
     ).addSvgIcon(
       'phone',
       domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/phone.svg')
+    ).addSvgIcon(
+      'filter-icon',
+      domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/filter.svg')
     );
   }
 
