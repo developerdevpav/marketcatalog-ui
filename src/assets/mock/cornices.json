@@ -1,0 +1,40 @@
+[
+  {
+    "id": "af24f129-2d8a-480b-9b75-b67bb8fdb7e6",
+    "title": "Карниз 2-рядный «Ажур» D16 Антик Антик",
+    "images": [
+      {
+        "url": "https://amihome.by/upload/iblock/1c3/lw200-white.jpg",
+        "avatar": true
+      }
+    ],
+    "color": {
+      "id": "35584613-0058-4f4e-a8c7-82fe4f00f383",
+      "value": "Оранжевый"
+    },
+    "pipeType": {
+      "id": "add18458-f076-416b-8b85-2c6e7a1afe7e",
+      "value": "Крученая"
+    },
+    "countRow": {
+      "id": "ff7241ef-4fd5-4371-b12b-16288cb04ed1",
+      "value": 1
+    },
+    "prices": [
+      {
+        "id": "72770119-e7ec-4aad-b3a4-09ae23e7ecee",
+        "typeRing": {
+          "id": "88853be4-0f9d-4138-88f8-8c4ebff8956d",
+          "value": "Простое"
+        },
+        "long": {
+          "id": "f384e97b-7ca5-4f7e-97c3-3a1ddcdd70d8",
+          "value": 1.6
+        },
+        "price": 56.48,
+        "count": 3,
+        "avatar": null
+      }
+    ]
+  }
+]

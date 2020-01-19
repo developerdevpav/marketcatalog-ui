@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreModule} from '@ngrx/store';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {DefaultDataServiceConfig, EntityMetadataMap, NgrxDataModule} from 'ngrx-data';
 import {environment} from '../../environments/environment';
 
@@ -38,7 +38,12 @@ const pluralNames = {
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({}, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    }),
     EffectsModule.forRoot([]),
     environment.production ? [] : StoreDevtoolsModule.instrument(),
     NgrxDataModule.forRoot({entityMetadata, pluralNames}),

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
 import {
   MatButtonModule,
@@ -11,11 +11,33 @@ import {
   MatIconModule,
   MatListModule,
   MatMenuModule,
+  MatPaginatorIntl,
+  MatPaginatorModule,
   MatProgressBarModule,
+  MatProgressSpinnerModule,
   MatSelectModule,
   MatSnackBarModule,
   MatTabsModule
 } from '@angular/material';
+import {AngularSvgIconModule} from 'angular-svg-icon';
+
+export class MatPaginatorIntlCro extends MatPaginatorIntl {
+  itemsPerPageLabel = 'Элементов на странице:';
+  nextPageLabel     = 'Далее';
+  previousPageLabel = 'Назад';
+  firstPageLabel = 'fsfsd';
+  lastPageLabel = 'sda';
+
+  getRangeLabel = (page, pageSize, length) => {
+    if (length === 0 || pageSize === 0) {
+      return '0 из ' + length;
+    }
+    length = Math.max(length, 0);
+    const startIndex = page * pageSize;
+    const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
+    return startIndex + 1 + ' - ' + endIndex + ' из ' + length;
+  }
+}
 
 @NgModule({
   declarations: [],
@@ -33,7 +55,10 @@ import {
     MatCardModule,
     MatDividerModule,
     MatSnackBarModule,
-    MatMenuModule
+    MatMenuModule,
+    AngularSvgIconModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatProgressBarModule,
@@ -49,7 +74,13 @@ import {
     MatCardModule,
     MatDividerModule,
     MatSnackBarModule,
-    MatMenuModule
+    MatMenuModule,
+    AngularSvgIconModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule
+  ],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: MatPaginatorIntlCro }
   ]
 })
 export class AngularMaterialModule {}

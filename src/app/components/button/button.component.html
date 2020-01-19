@@ -1,0 +1,4 @@
+<div class="button-custom">
+  <span *ngIf="text" [ngStyle]="!!text ? {'margin-right': '10px'} : {}">{{text}}</span>
+  <mat-icon [svgIcon]="iconSvg" [ngStyle]="!!iconSize ? {'width': iconSize} : {}"></mat-icon>
+</div>

@@ -1,0 +1,29 @@
+<div class="flex-catalog">
+  <div class="flex-catalog__header">
+    <div class="container" style="padding: 15px 0" [ngClass]="{'is-active': isFlow}">
+      <extension-panel [title]="titlePage" style="width: 100%;"></extension-panel>
+    </div>
+  </div>
+
+  <div class="container flex-catalog__body">
+    <div class="flex-catalog__loader" *ngIf="loading">
+      <loading></loading>
+    </div>
+    <div class="flex-catalog__body__filter">
+      <ng-content></ng-content>
+    </div>
+    <div class="flex-catalog__body__content" *ngIf="!loading">
+      <product-card *ngFor="let item of products"
+                    [key]="item.id"
+                    [avatarURL]="item.img"
+                    [title]="item.title"
+                    [titleActionBtn]="'Подробнее'">
+      </product-card>
+    </div>
+  </div>
+
+  <div class="flex-catalog__pagination container">
+    <pagination [size]="pageSize" [length]="length" (eventPageChange)="handleChangePage($event)"></pagination>
+  </div>
+
+</div>
