@@ -1,5 +1,5 @@
 <div class="flex-catalog">
-  <div class="flex-catalog__header" >
+  <div class="flex-catalog__header">
     <div class="container" style="padding: 15px 0" [ngClass]="{'is-active': isFlow}">
       <extension-panel [title]="titlePage" style="width: 100%;"></extension-panel>
     </div>
@@ -22,7 +22,8 @@
     </div>
   </div>
 
-  <div class="flex-catalog__pagination">
+  <div class="flex-catalog__pagination container">
     <pagination [size]="pageSize" [length]="length" (eventPageChange)="handleChangePage($event)"></pagination>
   </div>
+
 </div>

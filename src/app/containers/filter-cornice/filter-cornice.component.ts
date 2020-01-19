@@ -55,6 +55,40 @@ export class FilterCorniceComponent implements OnInit {
             value: 'Комплектующие для металлических'
           }
         ]
+      },
+      {
+        id: 'uuid',
+        title: 'Цвет',
+        values: [
+          {
+            id: 'uuid',
+            value: 'Металический'
+          },
+          {
+            id: 'uuid',
+            value: 'Пластиковые потолочные'
+          },
+          {
+            id: 'uuid',
+            value: 'Настенные металлопластиковые'
+          },
+          {
+            id: 'uuid',
+            value: 'Гибкие'
+          },
+          {
+            id: 'uuid',
+            value: 'Комплектующие для потолочных'
+          },
+          {
+            id: 'uuid',
+            value: 'Металлопластиковая фурнитура'
+          },
+          {
+            id: 'uuid',
+            value: 'Комплектующие для металлических'
+          }
+        ]
       }
     ]
   };

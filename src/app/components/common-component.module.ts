@@ -8,7 +8,6 @@ import {DropdownSelectComponent} from './dropdown-select/dropdown-select.compone
 import {ButtonComponent} from './button/button.component';
 import {ExtensionListComponent} from './extension-list/extension-list.component';
 
-
 @NgModule({
   declarations: [PaginationComponent, LoaderComponent, FilterExtensionPanelComponent,
     DropdownSelectComponent, ButtonComponent, ExtensionListComponent],

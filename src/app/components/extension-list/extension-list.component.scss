@@ -19,12 +19,10 @@
     flex-basis: 100%;
     padding: 10px 0;
 
-    width: 100%;
-
     input {
       height: 30px;
       width: 100%;
-
+      box-sizing: border-box;
       padding-left: 10px;
     }
   }
@@ -33,7 +31,7 @@
     display: flex;
     flex-wrap: wrap;
     height: max-content;
-    max-height: 160px;
+    max-height: 250px;
     overflow-y: hidden;
     width: 100%;
   }
