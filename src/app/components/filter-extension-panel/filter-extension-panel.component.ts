@@ -12,9 +12,16 @@ export interface ExtensionEvent {
   styleUrls: ['./filter-extension-panel.component.scss'],
   animations: [
     trigger('extension', [
-      state('opened', style({ height: '*', opacity: 1, paddingBottom: '10px' })),
+      state('opened', style({
+        height: '*',
+        opacity: 1,
+        paddingBottom: '10px',
+        borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+        borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+        paddingTop: '10px'
+      })),
       state('closed', style({ height: '0', opacity: 0, paddingBottom: 0 })),
-      transition('closed <=> opened', [ animate('0.2s') ])
+      transition('closed <=> opened', [ animate('0.1s') ])
     ])
   ]
 })
@@ -34,6 +41,8 @@ export class FilterExtensionPanelComponent implements OnInit {
 
   private state = 'opened';
 
+  private sort: string = 'ASC';
+
   constructor() { }
 
   ngOnInit() {
@@ -50,4 +59,11 @@ export class FilterExtensionPanelComponent implements OnInit {
     return this.opened ? 'opened' : 'closed';
   }
 
+  handleSortDestination(): void {
+    this.sort = this.sort === 'ASC' ? 'DESC' : 'ASC';
+  }
+
+  getIconSort(): string {
+    return this.sort === 'ASC' ? 'sort-up' : 'sort-down';
+  }
 }

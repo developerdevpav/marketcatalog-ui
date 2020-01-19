@@ -1,0 +1,13 @@
+<div class="extension-panel">
+  <div class="extension-panel__title">{{name}}</div>
+  <div class="extension-panel__search" *ngIf="opened">
+    <input type="text" alt="" placeholder="Поиск">
+  </div>
+  <div class="extension-panel__list" [@extension]="state">
+    <div class="extension-panel__item" (click)="selectItem(item)" *ngFor="let item of items">
+      {{item.value}}
+      <mat-icon class="extension-panel__icon" [svgIcon]="isSelected(item) ? 'tick' : ''"></mat-icon>
+    </div>
+  </div>
+  <div class="extension-panel__action" (click)="handleState()">{{opened ? 'Свернуть' : 'Развернуть'}}</div>
+</div>

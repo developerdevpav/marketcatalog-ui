@@ -1,0 +1,8 @@
+<div class="filter-box">
+  <ng-template ngFor let-filterItem [ngForOf]="filter.filters">
+    <extension-list multiple="true" (eventChange)="handle($event)" [name]="filterItem.title" [items]="filterItem.values">
+    </extension-list>
+  </ng-template>
+
+  <button mat-button style="width: 100%">Подобрать</button>
+</div>

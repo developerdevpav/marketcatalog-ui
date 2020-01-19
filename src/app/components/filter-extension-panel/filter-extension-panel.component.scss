@@ -1,32 +1,54 @@
 .extension-panel {
   cursor: pointer;
   width: 100%;
+  padding: 0 -15px;
 
   &__header-icon {
-    color: #3e2d8f;
+    font-size: 10px;
+    // color: #3e2d8f;
   }
 
   &__header {
     font-family: Circe, sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     color: #333;
     line-height: 1.556;
+    font-weight: bold;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 50px;
-    // padding: 0 10px 0 10px;
-    box-sizing: border-box;
+    box-sizing: content-box;
 
     span {
-      font-size: 28px;
+      font-size: 16px;
     }
 
-    &:hover .extension-panel__header-icon {
-      color: #4f3ec1;
+    &__sort-select-action {
+      min-width: 150px;
+      width: 200px;
+      height: 100%;
+      margin-right: 10px;
     }
+
+    &__sort-button-action {
+      // margin-right: 15px;
+    }
+
+    button {
+      font-size: 16px;
+      font-weight: 100;
+      background: rgba(0, 0, 0, 0.1);
+      span {
+        margin-right: 10px;
+      }
+      .mat-icon {
+        width: 18px;
+      }
+    }
+
   }
 
   &__body {

@@ -52,6 +52,24 @@ export class AppComponent implements OnInit {
     ).addSvgIcon(
       'filter-icon',
       domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/filter.svg')
+    ).addSvgIcon(
+      'expansion',
+      domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/baseline-expand.svg')
+    ).addSvgIcon(
+      'unexpansion',
+      domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/baseline-expand_less.svg')
+    ).addSvgIcon(
+      'tick',
+      domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/tick.svg')
+    ).addSvgIcon(
+      'circle-empty',
+      domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/circle-empty.svg')
+    ).addSvgIcon(
+      'sort-down',
+      domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/sort_down.svg')
+    ).addSvgIcon(
+      'sort-up',
+      domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/sort_up.svg')
     );
   }
 

@@ -1,4 +1,14 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {PageEvent} from '@angular/material';
 
 @Component({
@@ -41,18 +51,10 @@ export class FlexCatalogComponent implements OnInit, AfterViewInit, OnDestroy {
     this.eventPageChange.emit($event);
   }
 
-  handleHeaderClass = () => {
-    const nativeElement = this.headerproduct.nativeElement.offsetTop;
-    this.isFlow = (nativeElement - 20) !== 0;
-    console.log(this.isFlow);
-  }
-
   ngAfterViewInit(): void {
-    document.addEventListener('scroll', this.handleHeaderClass);
   }
 
   ngOnDestroy(): void {
-    document.removeEventListener('scroll', this.handleHeaderClass);
   }
 
 }

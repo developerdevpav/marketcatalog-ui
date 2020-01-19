@@ -1,9 +1,20 @@
 <div class="extension-panel">
-  <div class="extension-panel__header" (click)="handleState()">
+  <div class="extension-panel__header" [ngStyle]="!!opened ? {'padding-bottom': '10px'} : {}">
     <span>{{title}}</span>
-    <mat-icon class="extension-panel__header-icon" svgIcon="filter-icon"></mat-icon>
+    <div style="flex-basis: 60%; display: flex; flex-wrap: nowrap; justify-content: flex-end">
+      <div class="extension-panel__header__sort-select-action">
+        <dropdown-select selectIndexItem="0" closeAfterSelect="true" onlySingleAlways="true" defaultNoneSelect="Нет выбронных" [items]="[
+          {value: 'Название'},
+          {value: 'Дата добавления'}
+        ]"></dropdown-select>
+      </div>
+      <div class="extension-panel__header__sort-button-action">
+        <button-custom [iconSvg]="getIconSort()" (click)="handleSortDestination()" iconSize="18px"></button-custom>
+      </div>
+    </div>
   </div>
   <div class="extension-panel__body" [@extension]="state">
+    dadjuasidsa
     <ng-content></ng-content>
   </div>
 </div>

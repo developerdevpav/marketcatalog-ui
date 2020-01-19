@@ -28,7 +28,7 @@ export class AbstractProductController<T extends AbstractProduct> implements OnI
 
   protected pageConf: Page = {
     page: 0,
-    size: 30,
+    size: 35,
     total: 0
   };
 
