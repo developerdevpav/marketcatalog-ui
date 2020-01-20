@@ -1,0 +1,12 @@
+<div class="dropdown">
+  <div class="dropdown-button" [ngStyle]="opened ? {'border-bottom': 'none'} : {}" (click)="handleState()">
+    <span>{{handleSelectedItemHeader()}}</span>
+    <mat-icon class="dropdown-button__icon" [svgIcon]="opened ? 'unexpansion' : 'expansion'"></mat-icon>
+  </div>
+  <div class="dropdown-list" [@extension]="state">
+    <div class="dropdown-item" *ngFor="let item of items" (click)="selectItem(item)">
+      {{item.value}}
+      <mat-icon class="dropdown-item__icon" [svgIcon]="isSelected(item) ? 'tick' : ''"></mat-icon>
+    </div>
+  </div>
+</div>

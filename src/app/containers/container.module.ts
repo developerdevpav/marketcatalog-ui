@@ -4,11 +4,13 @@ import {ProductCardComponent} from './product-card/product-card.component';
 import {AngularMaterialModule} from '../angular-material/angular-material.module';
 import {CommonModule} from '@angular/common';
 import {CommonComponentModule} from '../components/common-component.module';
+import {FilterCorniceComponent} from './filter-cornice/filter-cornice.component';
 
 @NgModule({
   declarations: [
     FlexCatalogComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    FilterCorniceComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import {CommonComponentModule} from '../components/common-component.module';
   ],
   exports: [
     ProductCardComponent,
-    FlexCatalogComponent
+    FlexCatalogComponent,
+    FilterCorniceComponent
   ]
 })
 export class ContainerModule { }

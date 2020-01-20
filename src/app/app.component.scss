@@ -27,7 +27,6 @@
         flex-wrap: nowrap;
         justify-content: flex-start;
         align-items: center;
-        padding-left: 15px;
         cursor: pointer;
       }
 
@@ -259,6 +258,7 @@
           height: 50px;
           align-items: center;
           padding-left: 15px;
+          border: none;
         }
 
         div.isActive {

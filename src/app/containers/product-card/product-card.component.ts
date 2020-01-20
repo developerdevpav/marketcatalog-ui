@@ -30,11 +30,6 @@ export class ProductCardComponent implements OnInit {
   @Output()
   private eventClickDetails = new EventEmitter<string>();
 
-  @Input()
-  public width: string = '200px';
-
-  @Input()
-  public height: string = '300px';
 
   constructor() {
   }
