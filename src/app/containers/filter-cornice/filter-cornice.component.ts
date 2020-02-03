@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Item} from '../../components/extension-list/extension-list.component';
+import {ProductCharacteristicService} from '../../pages/product-page/service/product-characteristic.service';
+import {FilterProductCharacteristic} from '../../store/domain/product-characteristic/product-characteristic';
 
 export interface Filter {
   filters: FilterItem[];
@@ -20,91 +22,36 @@ export class FilterCorniceComponent implements OnInit {
 
   long: Array<Item> = [];
 
-  private filter: Filter = {
-    filters: [
-      {
-        id: 'uuid',
-        title: 'Тип карниза',
-        values: [
-          {
-            id: 'uuid',
-            value: 'Металический'
-          },
-          {
-            id: 'uuid',
-            value: 'Пластиковые потолочные'
-          },
-          {
-            id: 'uuid',
-            value: 'Настенные металлопластиковые'
-          },
-          {
-            id: 'uuid',
-            value: 'Гибкие'
-          },
-          {
-            id: 'uuid',
-            value: 'Комплектующие для потолочных'
-          },
-          {
-            id: 'uuid',
-            value: 'Металлопластиковая фурнитура'
-          },
-          {
-            id: 'uuid',
-            value: 'Комплектующие для металлических'
-          }
-        ]
-      },
-      {
-        id: 'uuid',
-        title: 'Цвет',
-        values: [
-          {
-            id: 'uuid',
-            value: 'Металический'
-          },
-          {
-            id: 'uuid',
-            value: 'Пластиковые потолочные'
-          },
-          {
-            id: 'uuid',
-            value: 'Настенные металлопластиковые'
-          },
-          {
-            id: 'uuid',
-            value: 'Гибкие'
-          },
-          {
-            id: 'uuid',
-            value: 'Комплектующие для потолочных'
-          },
-          {
-            id: 'uuid',
-            value: 'Металлопластиковая фурнитура'
-          },
-          {
-            id: 'uuid',
-            value: 'Комплектующие для металлических'
-          }
-        ]
-      }
-    ]
-  };
+  @Input()
+  filter: Filter;
 
-  constructor() { }
+  @Input()
+  category: string;
+
+  constructor(private productService: ProductCharacteristicService) { }
 
   ngOnInit() {
-    for (let i = 1; i < 10.0; i += 0.2000) {
-      this.long.push({
-        value: `${i}`
+    if (this.category) {
+      this.productService.getFilterByCategory(this.category).subscribe((filters: FilterProductCharacteristic[]) => {
+        const array = filters.map(it => ({
+          id: it.id,
+          title: it.title,
+          dataType: it.dataType,
+          values: it.values
+            .filter(value => value.trim() !== '-' || value.trim() !== '')
+            .map(value => ({
+              value
+            } as Item))
+        } as FilterItem));
+
+        this.filter = {
+          filters: array
+        };
       });
     }
   }
 
-  handle($event) {
+  handle($event: Array<Item>) {
 
   }
-
 }

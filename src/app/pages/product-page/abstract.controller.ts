@@ -24,6 +24,8 @@ export class AbstractProductController<T extends AbstractProduct> implements OnI
   protected products: Observable<T[]>;
   protected service: EntityCollectionService<T>;
 
+  protected category: string;
+
   protected loading: boolean = false;
 
   protected pageConf: Page = {
@@ -69,6 +71,12 @@ export class AbstractProductController<T extends AbstractProduct> implements OnI
 
     if (size) {
       this.pageConf.size = Math.max(size, 0);
+    }
+
+    const category = paramMap.get('category');
+
+    if (category) {
+      this.category = category;
     }
   }
 

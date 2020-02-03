@@ -15,8 +15,7 @@
         <ul>
           <li *ngFor="let category of (getParentCategory() | async)"
               (mouseover)="handleMouseOver(category.id)" (click)="handleClickCategory(category)">
-            <div [routerLink]="'product/' + category.systemName"
-                 [ngClass]="{'isActive': activeMenuItem === category.id}">
+            <div (click)="routLink('product/' + category.systemName, category.id)" [ngClass]="{'isActive': activeMenuItem === category.id}">
               {{category.title}}
             </div>
           </li>
@@ -25,7 +24,7 @@
       <div class="catalog-product-menu__subcategory">
         <ul>
           <li *ngFor="let category of (getChildCategory() | async)">
-            <div>
+            <div (click)="routLink('product/' + category.systemName, category.id)">
               {{category.title}}
             </div>
           </li>
@@ -33,7 +32,6 @@
       </div>
     </div>
     <div class="content__body">
-
       <router-outlet></router-outlet>
     </div>
   </section>

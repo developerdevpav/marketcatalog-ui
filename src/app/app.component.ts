@@ -5,6 +5,7 @@ import {MarketCatalogStore} from './store/market-catalog-store.module';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {map} from 'rxjs/operators';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -24,26 +25,24 @@ export class AppComponent implements OnInit {
   serviceStore: EntityCollectionService<ProductCategory>;
 
   constructor(private matIconRegistry: MatIconRegistry,
+              private activatedRout: ActivatedRoute,
+              private router: Router,
               private domSanitizer: DomSanitizer, private entityServices: EntityServices) {
     this.serviceStore = entityServices.getEntityCollectionService(MarketCatalogStore.PRODUCT_CATEGORY);
     this.category$ = this.serviceStore.entities$;
-    this.matIconRegistry
-      .addSvgIcon(
-        'info_company_hand',
-        domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/info_company/hands.svg')
-      )
-      .addSvgIcon(
-        'info_company_idea',
-        domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/info_company/idea.svg')
-      )
-      .addSvgIcon(
-        'info_company_truck',
-        domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/info_company/truck.svg')
-      )
-      .addSvgIcon(
-        'info_company_notes',
-        domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/info_company/notes.svg')
-      ).addSvgIcon(
+    this.matIconRegistry.addSvgIcon(
+      'info_company_hand',
+      domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/info_company/hands.svg')
+    ).addSvgIcon(
+      'info_company_idea',
+      domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/info_company/idea.svg')
+    ).addSvgIcon(
+      'info_company_truck',
+      domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/info_company/truck.svg')
+    ).addSvgIcon(
+      'info_company_notes',
+      domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/info_company/notes.svg')
+    ).addSvgIcon(
       'clear',
       domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/clear.svg')
     ).addSvgIcon(
@@ -83,6 +82,15 @@ export class AppComponent implements OnInit {
 
   getParentCategory(): Observable<ProductCategory[]> {
     return this.filterCategory(it => it.child === it.id);
+  }
+
+  routLink(path: string, id: string) {
+    this.router.navigate([path],
+      {
+        queryParams: {
+          category: id
+        }
+      });
   }
 
   getChildCategory(): Observable<ProductCategory[]> {
