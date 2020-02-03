@@ -1,5 +1,8 @@
 <flex-catalog [products]="(products | async)"
               (eventPageChange)="handleChangePage($event)"
               [pageSize]="pageConf.size"
-              [length]="300">
+              [length]="pageConf.total"
+              [loading]="loading"
+              [titlePage]="'Карнизы'">
+  <filter-cornice></filter-cornice>
 </flex-catalog>

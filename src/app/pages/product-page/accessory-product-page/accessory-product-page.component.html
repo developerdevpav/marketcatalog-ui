@@ -1,5 +1,7 @@
 <flex-catalog [products]="(products | async)"
               (eventPageChange)="handleChangePage($event)"
               [pageSize]="pageConf.size"
-              [length]="300">
+              [length]="pageConf.total"
+              [loading]="loading"
+              [titlePage]="'Аксессуары и фурнитура для штор'">
 </flex-catalog>

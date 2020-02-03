@@ -1,0 +1,19 @@
+.filter-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  width: 250px;
+
+  button {
+    background: #f7f7f7;
+  }
+  extension-list {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+}

@@ -7,6 +7,7 @@ import {MarketCatalogStoreModule} from './store/market-catalog-store.module';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AngularMaterialModule} from './angular-material/angular-material.module';
+import {CommonComponentModule} from './components/common-component.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {AngularMaterialModule} from './angular-material/angular-material.module'
     MarketCatalogStoreModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    CommonComponentModule
   ],
   providers: [],
   bootstrap: [AppComponent]
