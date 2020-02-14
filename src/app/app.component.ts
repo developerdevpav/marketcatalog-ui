@@ -6,6 +6,7 @@ import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {map} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ProductInformation} from './pages/product-information/product-information.component';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,39 @@ export class AppComponent implements OnInit {
   extensionMenu = false;
 
   activeMenuItem: string;
+
+  categories: ProductCategory[];
+
+  info: ProductInformation = {
+    id: 'vafefef',
+    // tslint:disable-next-line:max-line-length
+    images: [
+      {
+        url: 'https://asforos.by/upload/resize_cache/iblock/2d6/500_500_17236f3bb137eb253405d06e58cacf26c/2d680639b1cc829cce56faceb6ff5cb3.JPG'
+      }
+    ],
+    value: 'Title product',
+    properties: [
+      {
+        title: 'Characteristic',
+        values: [
+          'val', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3'
+        ]
+      },
+      {
+        title: 'Characteristic2',
+        values: [
+          'val', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3'
+        ]
+      },
+      {
+        title: 'Characteristic3',
+        values: [
+          'val', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3', 'val2', 'val3', 'val', 'val2', 'val3'
+        ]
+      }
+    ]
+  };
 
   category$: Observable<ProductCategory[]>;
   serviceStore: EntityCollectionService<ProductCategory>;
@@ -74,6 +108,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.serviceStore.getAll();
+
+    this.category$.subscribe(it => {
+      this.categories = it;
+    });
   }
 
   handleExtensionMenu() {
@@ -81,20 +119,20 @@ export class AppComponent implements OnInit {
   }
 
   getParentCategory(): Observable<ProductCategory[]> {
-    return this.filterCategory(it => it.child === it.id);
+    return this.filterCategory(it => it.parent === it.id);
   }
 
   routLink(path: string, id: string) {
-    this.router.navigate([path],
-      {
+    this.router.navigate([path], {
         queryParams: {
           category: id
         }
-      });
+      }
+    );
   }
 
   getChildCategory(): Observable<ProductCategory[]> {
-    return this.filterCategory(it => it.child === this.activeMenuItem && it.id !== this.activeMenuItem);
+    return this.filterCategory(it => it.parent === this.activeMenuItem && it.id !== this.activeMenuItem);
   }
 
   filterCategory(predicate: (category: ProductCategory) => boolean): Observable<ProductCategory[]> {
@@ -109,5 +147,22 @@ export class AppComponent implements OnInit {
 
   handleClickCategory(category: ProductCategory) {
     this.extensionMenu = false;
+  }
+
+  handleSelectCategory(category: ProductCategory) {
+    const recursiveParentCategory = this.getRecursiveParentCategory(category);
+    this.routLink('product/' + recursiveParentCategory, category.id);
+  }
+
+  getRecursiveParentCategory(category: ProductCategory): string {
+    if (category.id === category.parent) {
+      return category.systemName;
+    }
+
+    return this.getRecursiveParentCategory(this.searchCategory(category.parent));
+  }
+
+  searchCategory(id: string) {
+    return this.categories.find(it => it.id === id);
   }
 }

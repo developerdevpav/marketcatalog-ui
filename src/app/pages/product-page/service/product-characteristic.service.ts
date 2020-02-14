@@ -16,7 +16,7 @@ export class ProductCharacteristicService extends AbstractClient<ProductCharacte
     const httpParams: HttpParams = new HttpParams()
       .set('id', id);
 
-    return this.http.get(this.url + '/findCharacteristic', {
+    return this.http.get(this.url + '/filter', {
       params: httpParams
     });
   }

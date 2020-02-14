@@ -1,0 +1,19 @@
+<div class="avatar-carousel" [ngStyle]="{
+        width: $config.width,
+        height: $config.height,
+        border: $config.border
+}">
+  <div [ngClass]="{'avatar-mirror-dark' : image}"></div>
+  <div class="avatar-prev" *ngIf="image" (click)="prev()">
+    <svg-icon src="../assets/icon/left-arrow.svg" [svgStyle]="{ 'width.px': 40, 'height.px': 60 }"></svg-icon>
+  </div>
+  <div class="avatar-counter" *ngIf="image">
+    <span>{{index + 1}} / {{images.length}}</span>
+  </div>
+  <div class="avatar-next" *ngIf="image" (click)="next()">
+    <svg-icon src="../assets/icon/right-arrow.svg" [svgStyle]="{ 'width.px': 40, 'height.px': 60 }"></svg-icon>
+  </div>
+
+  <img class="avatar" *ngIf="image" [src]="image?.url" (click)="next()" [ngStyle]="{
+        objectFit: $config.objectFit}">
+</div>

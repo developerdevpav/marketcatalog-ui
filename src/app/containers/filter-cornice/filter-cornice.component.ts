@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Item} from '../../components/extension-list/extension-list.component';
 import {ProductCharacteristicService} from '../../pages/product-page/service/product-characteristic.service';
 import {FilterProductCharacteristic} from '../../store/domain/product-characteristic/product-characteristic';
@@ -28,6 +28,9 @@ export class FilterCorniceComponent implements OnInit {
   @Input()
   category: string;
 
+  @Output()
+  public eventChange = new EventEmitter<FilterItem>();
+
   constructor(private productService: ProductCharacteristicService) { }
 
   ngOnInit() {
@@ -38,7 +41,19 @@ export class FilterCorniceComponent implements OnInit {
           title: it.title,
           dataType: it.dataType,
           values: it.values
-            .filter(value => value.trim() !== '-' || value.trim() !== '')
+            .filter(value => value.trim() !== '-' && value.trim() !== '')
+            .map(value => {
+              const existAlt = value.toLowerCase().indexOf('alt=\'');
+              if (existAlt !== -1) {
+                const num = value.toLowerCase().lastIndexOf('alt=\'');
+                return value
+                  .substring(num, value.length)
+                  .replace('alt=', '')
+                  .split('\'')
+                  .join('');
+              }
+              return value;
+            })
             .map(value => ({
               value
             } as Item))
@@ -51,7 +66,7 @@ export class FilterCorniceComponent implements OnInit {
     }
   }
 
-  handle($event: Array<Item>) {
+  handle($event: Array<Item>, filterItem: FilterItem) {
 
   }
 }

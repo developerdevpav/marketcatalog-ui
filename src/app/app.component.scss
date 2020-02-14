@@ -91,6 +91,7 @@
     &__body {
       padding-top: 20px;
       padding-bottom: 20px;
+      margin: 0 1px 0 0px;
     }
   }
 
@@ -202,9 +203,10 @@
   top: 0;
   left: 0;
   right: 0;
+  padding: 0;
   z-index: 10000;
   box-sizing: border-box;
-  height: calc(100vh - 50px);
+  height: 100%;
   display: flex;
   flex-wrap: nowrap;
   //background: linear-gradient(90deg,#f7f7f7 50%,#f7f7f7 0);
@@ -245,6 +247,7 @@
       list-style: none;
       margin: 0;
       padding: 0;
+      background: #fbfbfb;
 
       li {
         padding: 0;

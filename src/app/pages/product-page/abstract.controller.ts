@@ -4,7 +4,7 @@ import {Observable, Subscription} from 'rxjs';
 import {EntityCollectionService, EntityServices, QueryParams} from 'ngrx-data';
 import {PageEvent} from '@angular/material';
 import {MarketCatalogStore} from '../../store/market-catalog-store.module';
-import {RolstorHttpService} from './service/rolstor-http.service';
+import {AbstractProductService} from "./service/abstract.product.service";
 
 export enum PageQuery {
   PAGE = 'page',
@@ -12,9 +12,22 @@ export enum PageQuery {
 }
 
 export interface Page {
+  category?: string[];
   page: number;
   size: number;
   total: number;
+  filters?: Filter[];
+}
+
+export enum FilterType {
+  EQ = 'EQ',
+  FT = 'FT'
+}
+
+export interface Filter {
+  id_charact: string;
+  value: string[];
+  type: FilterType;
 }
 
 export class AbstractProductController<T extends AbstractProduct> implements OnInit, OnDestroy {
@@ -29,22 +42,25 @@ export class AbstractProductController<T extends AbstractProduct> implements OnI
   protected loading: boolean = false;
 
   protected pageConf: Page = {
+    category: [],
     page: 0,
-    size: 35,
-    total: 0
+    size: 36,
+    total: 0,
+    filters: []
   };
 
   constructor(protected activeRouting: ActivatedRoute,
               protected router: Router,
               protected entityServices: EntityServices,
               protected marketCatalogStore: MarketCatalogStore,
-              protected serviceHttp: RolstorHttpService) {
+              protected serviceHttp: AbstractProductService<T>) {
     this.service = entityServices.getEntityCollectionService(marketCatalogStore);
   }
 
   ngOnInit(): void {
     this.products = this.service.entities$;
     const subscriptionQueryParamMap = this.activeRouting.queryParamMap.subscribe(query => {
+      console.log('change by query: ', query);
       this.ripperPageQuery(query);
       this.navigate();
       this.getPageByQuery(this.pageConf);
@@ -115,6 +131,12 @@ export class AbstractProductController<T extends AbstractProduct> implements OnI
 
   getCount() {
     return this.serviceHttp.getCount();
+  }
+
+  handleClickDetails($event: string) {
+    this.router.navigate([$event], {
+      relativeTo: this.activeRouting
+    });
   }
 
 }

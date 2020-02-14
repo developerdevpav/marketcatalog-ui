@@ -10,7 +10,7 @@
   </header>
 
   <section class="content">
-    <div class="catalog-product-menu" *ngIf="extensionMenu">
+    <div class="catalog-product-menu container" *ngIf="extensionMenu">
       <div class="catalog-product-menu__category">
         <ul>
           <li *ngFor="let category of (getParentCategory() | async)"
@@ -24,7 +24,7 @@
       <div class="catalog-product-menu__subcategory">
         <ul>
           <li *ngFor="let category of (getChildCategory() | async)">
-            <div (click)="routLink('product/' + category.systemName, category.id)">
+            <div (click)="handleSelectCategory(category)">
               {{category.title}}
             </div>
           </li>

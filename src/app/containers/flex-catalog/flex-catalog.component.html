@@ -17,6 +17,7 @@
                     [key]="item.id"
                     [avatarURL]="item.img"
                     [title]="item.title"
+                    (eventClickDetails)="handleEventGetDetails($event)"
                     [titleActionBtn]="'Подробнее'">
       </product-card>
     </div>

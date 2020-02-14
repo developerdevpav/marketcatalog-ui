@@ -7,20 +7,28 @@ import {FilterExtensionPanelComponent} from './filter-extension-panel/filter-ext
 import {DropdownSelectComponent} from './dropdown-select/dropdown-select.component';
 import {ButtonComponent} from './button/button.component';
 import {ExtensionListComponent} from './extension-list/extension-list.component';
+import {FormsModule} from '@angular/forms';
+import {NgxPipeModule} from '../pipes/ngx-pipe/ngx-pipe.module';
+import {ChipComponent} from './chip/chip.component';
+import {ImageCarouselComponent} from './image-carousel/image-carousel.component';
 
 @NgModule({
   declarations: [PaginationComponent, LoaderComponent, FilterExtensionPanelComponent,
-    DropdownSelectComponent, ButtonComponent, ExtensionListComponent],
+    DropdownSelectComponent, ButtonComponent, ExtensionListComponent, ChipComponent, ImageCarouselComponent],
   exports: [
     PaginationComponent,
     LoaderComponent,
     FilterExtensionPanelComponent,
     DropdownSelectComponent,
-    ExtensionListComponent
+    ExtensionListComponent,
+    ChipComponent,
+    ImageCarouselComponent
   ],
   imports: [
     CommonModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    FormsModule,
+    NgxPipeModule
   ]
 })
 export class CommonComponentModule { }

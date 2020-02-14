@@ -37,6 +37,8 @@ export class ExtensionListComponent implements OnInit {
 
   public opened: boolean = false;
 
+  public search = '';
+
   private state: string = 'closed';
 
   @Input()

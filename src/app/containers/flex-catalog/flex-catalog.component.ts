@@ -24,6 +24,9 @@ export class FlexCatalogComponent implements OnInit, AfterViewInit, OnDestroy {
   protected isFlow: boolean;
 
   @Output()
+  eventGetDetails = new EventEmitter<string>();
+
+  @Output()
   public eventPageChange: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
 
   @Input()
@@ -55,6 +58,11 @@ export class FlexCatalogComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+  }
+
+  handleEventGetDetails($event: string) {
+    this.eventGetDetails.emit($event);
+    console.log($event);
   }
 
 }

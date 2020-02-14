@@ -8,6 +8,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AngularMaterialModule} from './angular-material/angular-material.module';
 import {CommonComponentModule} from './components/common-component.module';
+import {AngularYandexMapsModule} from 'angular8-yandex-maps';
+
+const API_KEY = '5557c22c-f442-4b3f-a5bb-2c4591e14201';
 
 @NgModule({
   declarations: [
@@ -20,9 +23,11 @@ import {CommonComponentModule} from './components/common-component.module';
     HttpClientModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
-    CommonComponentModule
+    CommonComponentModule,
+    AngularYandexMapsModule.forRoot(API_KEY)
   ],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

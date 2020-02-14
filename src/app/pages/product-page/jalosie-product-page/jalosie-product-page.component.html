@@ -3,6 +3,7 @@
               [pageSize]="pageConf.size"
               [length]="pageConf.total"
               [loading]="loading"
+              (eventGetDetails)="handleClickDetails($event)"
               [titlePage]="'Жалюзи'">
   <filter-cornice [category]="category"></filter-cornice>
 </flex-catalog>

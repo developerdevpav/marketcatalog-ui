@@ -1,0 +1,96 @@
+.avatar-carousel {
+  width: inherit;
+  height: 300px;
+  position: relative;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, .12);
+
+  .avatar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-width: 100px;
+    object-fit: cover;
+  }
+
+  .avatar-mirror-dark {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    background: black;
+    z-index: 1;
+
+    &:hover {
+      opacity: 0.4;
+    }
+
+    &:hover ~ .avatar-prev {
+      opacity: 1;
+      z-index: 19999;
+    }
+
+    &:hover ~ .avatar-next {
+      opacity: 1;
+      z-index: 19999;
+    }
+  }
+
+  .avatar-prev, .avatar-next {
+    display: flex;
+    position: absolute;
+    cursor: pointer;
+    width: 50px;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+    z-index: 1000;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:hover svg-icon {
+      opacity: 1;
+      fill: #747474;
+    }
+
+    svg-icon {
+      fill: white;
+    }
+  }
+
+  .avatar-next {
+    right: 0;
+  }
+
+  .avatar-prev {
+    left: 0;
+  }
+
+  .avatar-counter {
+    display: flex;
+    position: absolute;
+    cursor: pointer;
+    padding: 0 15px;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    color: white;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    opacity: 1;
+    z-index: 1000;
+  }
+
+}
+

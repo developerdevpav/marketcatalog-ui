@@ -12,12 +12,30 @@ import {RolstorHttpService} from './service/rolstor-http.service';
 import {CorniceHttpService} from './service/cornice-http.service';
 import {JalosieHttpService} from './service/jalosie-http.service';
 import {AccessoryHttpService} from './service/accessory-http.service';
+import {ProductInformationComponent} from '../product-information/product-information.component';
+import {AngularYandexMapsModule} from 'angular8-yandex-maps';
 
 const routes: Routes = [
-  {path: 'rolstor', component: RolstorProductPageComponent},
-  {path: 'cornice', component: CorniceProductPageComponent},
-  {path: 'jalousie', component: JalosieProductPageComponent},
-  {path: 'accessory', component: AccessoryProductPageComponent}
+  {
+    path: 'rolstor',
+    component: RolstorProductPageComponent
+  },
+  { path: 'rolstor/:id', component: ProductInformationComponent, data: { service: 'rolstor' } },
+  {
+    path: 'cornice',
+    component: CorniceProductPageComponent
+  },
+  { path: 'cornice/:id', component: ProductInformationComponent, data: { service: 'cornice' }  },
+  {
+    path: 'jalousie',
+    component: JalosieProductPageComponent
+  },
+  { path: 'jalousie/:id', component: ProductInformationComponent, data: { service: 'jalousie' }  },
+  {
+    path: 'accessory',
+    component: AccessoryProductPageComponent
+  },
+  { path: 'accessory/:id', component: ProductInformationComponent, data: { service: 'accessory' }  }
 ];
 
 
@@ -26,20 +44,23 @@ const routes: Routes = [
     RolstorProductPageComponent,
     CorniceProductPageComponent,
     JalosieProductPageComponent,
-    AccessoryProductPageComponent
+    AccessoryProductPageComponent,
+    ProductInformationComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     AngularMaterialModule,
     ContainerModule,
-    CommonComponentModule
+    CommonComponentModule,
+    AngularYandexMapsModule
   ],
   providers: [
     RolstorHttpService,
     CorniceHttpService,
     JalosieHttpService,
-    AccessoryHttpService
+    AccessoryHttpService,
+    ProductInformationComponent
   ]
 })
 export class ProductPageModule {
