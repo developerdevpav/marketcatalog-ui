@@ -1,7 +1,8 @@
 <div class="flex-catalog">
   <div class="flex-catalog__header">
     <div class="container" style="padding: 15px 0" [ngClass]="{'is-active': isFlow}">
-      <extension-panel [title]="titlePage" style="width: 100%;"></extension-panel>
+      <extension-panel (eventChangeSort)="handleSortEvent($event)"
+                       [title]="titlePage + (!!paginationSize ? ' (' +  paginationSize + ')' : '')" style="width: 100%;"></extension-panel>
     </div>
   </div>
 
@@ -12,19 +13,29 @@
     <div class="flex-catalog__body__filter">
       <ng-content></ng-content>
     </div>
-    <div class="flex-catalog__body__content" *ngIf="!loading">
-      <product-card *ngFor="let item of products"
-                    [key]="item.id"
-                    [avatarURL]="item.img"
-                    [title]="item.title"
-                    (eventClickDetails)="handleEventGetDetails($event)"
-                    [titleActionBtn]="'Подробнее'">
+    <div class="flex-catalog__body__content" *ngIf="!!products && products?.length !== 0">
+      <product-card
+        *ngFor="let item of products | sortCatalog:sortEvent"
+        [key]="item.id"
+        [avatarURL]="item.img"
+        [title]="item.title"
+        (eventClickDetails)="handleEventGetDetails($event)"
+        [titleActionBtn]="'Подробнее'">
       </product-card>
+    </div>
+    <div *ngIf="!!products && products?.length === 0" style="flex-basis: 80%;">
+      <div class="col-12 mt-5 not-found-text">
+        По Вашему запросу ничего не найдено
+      </div>
     </div>
   </div>
 
   <div class="flex-catalog__pagination container">
-    <pagination [page]="paginationPage" [size]="paginationSize" (eventPageChange)="handleChangePage($event)"></pagination>
+    <mat-paginator [length]="paginationSize"
+                   [pageIndex]="paginationPage"
+                   [pageSize]="36"
+                   (page)="handleChangePage($event)">
+    </mat-paginator>
   </div>
 
 </div>

@@ -1,0 +1,12 @@
+.dialog-content {
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.dialog-window {
+  border-radius: 0;
+}
+
+::ng-deep .mat-dialog-container {
+  border-radius: 0;
+}

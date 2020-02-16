@@ -10,6 +10,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {PageEvent} from '@angular/material';
+import {SortEvent, SortType} from '../../components/filter-extension-panel/filter-extension-panel.component';
 
 @Component({
   selector: 'flex-catalog',
@@ -21,7 +22,12 @@ export class FlexCatalogComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('headerproduct', {static: true})
   public headerproduct: ElementRef;
 
-  protected isFlow: boolean;
+  public isFlow: boolean;
+
+  public sortEvent: SortEvent = {
+    field: 'title',
+    type: SortType.ASC
+  } as SortEvent;
 
   @Output()
   eventGetDetails = new EventEmitter<string>();
@@ -64,4 +70,7 @@ export class FlexCatalogComponent implements OnInit, AfterViewInit, OnDestroy {
     this.eventGetDetails.emit($event);
   }
 
+  handleSortEvent($event: SortEvent) {
+    this.sortEvent = $event;
+  }
 }

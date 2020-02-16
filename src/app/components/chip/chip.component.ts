@@ -13,7 +13,7 @@ export interface ChipProps {
 export class ChipComponent implements OnInit {
 
   @Input()
-  private props: ChipProps;
+  public props: ChipProps;
 
   styles = {
     background: '#785fff',

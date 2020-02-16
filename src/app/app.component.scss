@@ -86,12 +86,10 @@
 
   .content {
     position: relative;
-    padding: 0;
 
     &__body {
-      padding-top: 20px;
-      padding-bottom: 20px;
-      margin: 0 1px 0 0px;
+      padding: 20px 10px;
+      margin: 0 10px 0 10px;
     }
   }
 
@@ -102,14 +100,16 @@
     position: absolute;
     width: 100%;
     // box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-    background: #e8e8e870;
+    background: #3e2d8f;
     bottom: 0;
     left: 0;
+    color: white;
     right: 0;
+    height: 270px;
 
     &__wrapper {
       width: 100%;
-      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.6);
     }
 
     &__navigator, &__contact {
@@ -125,7 +125,7 @@
         cursor: pointer;
         margin: 20px 0;
         text-decoration: none;
-        color: #333333;
+        color: white;
         font-size: 14px;
       }
     }
@@ -142,7 +142,7 @@
       svg-icon {
         margin-right: 15px;
         cursor: pointer;
-        fill: #586069;
+        fill: white;
 
         &:hover {
           fill: #785fff;
@@ -164,7 +164,7 @@
       justify-content: center;
       align-items: center;
       position: relative;
-      background: rgba(255, 255, 255, 0.44);
+      background: #4a2d8fad;
       height: 40px;
       padding-right: 0;
       padding-left: 0;
@@ -175,7 +175,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #586069 !important;
+        color: white;
         font-size: 10px !important;
       }
     }
@@ -210,18 +210,29 @@
   display: flex;
   flex-wrap: nowrap;
   //background: linear-gradient(90deg,#f7f7f7 50%,#f7f7f7 0);
+  box-shadow: 12px 0 10px -4px rgba(0, 0, 0, 0.1), -12px 0 10px -4px rgba(0, 0, 0, 0.1);
 
   &__category {
     position: relative;
+    color: white;
     flex-basis: 20%;
     font-size: 14px;
-    background: linear-gradient(90deg,#f7f7f7 50%,#f7f7f7 0);
+    background: #3e2d8f;
+
+    ul {
+      li {
+        &:hover {
+          background: #f3f3f3;
+          color: black;
+        }
+      }
+    }
   }
 
   &__subcategory {
     position: relative;
     flex-basis: 80%;
-    background: white;
+    background: #fbfbfb;
     font-size: 14px;
     line-height: 18px;
     color: #222;
@@ -230,12 +241,14 @@
 
     ul {
       li {
-        height: 40px;
+        height: 50px;
         opacity: .7;
+
         &:hover {
-          color: black;
+          color: white;
           opacity: 1;
           font-size: 15px;
+          background: #3e2d8f;
         }
       }
     }
@@ -247,7 +260,6 @@
       list-style: none;
       margin: 0;
       padding: 0;
-      background: #fbfbfb;
 
       li {
         padding: 0;
@@ -265,7 +277,8 @@
         }
 
         div.isActive {
-          background: white;
+          background: #f3f3f3;
+          color: #785fff;
         }
       }
     }

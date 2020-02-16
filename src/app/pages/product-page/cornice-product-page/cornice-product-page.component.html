@@ -6,5 +6,7 @@
               [titlePage]="'Карнизы'">
   <filter-cornice [category]="category"
                   [countFilterItem]="(paginationLength | async)"
-                  (eventFilterBtn)="handleFilter()" (eventChange)="handleChangeFilter($event)"></filter-cornice>
+                  (eventFilterReset)="handleFilterReset()"
+                  (eventFilterBtn)="handleFilter()"
+                  (eventChange)="handleChangeFilter($event)"></filter-cornice>
 </flex-catalog>

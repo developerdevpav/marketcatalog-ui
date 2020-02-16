@@ -1,9 +1,20 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {ItemSelect} from "../dropdown-select/dropdown-select.component";
 
 export interface ExtensionEvent {
   id: string;
   opened: boolean;
+}
+
+export enum SortType {
+  ASC= 'ASC',
+  DESC = 'DESC'
+}
+
+export interface SortEvent {
+  field: string;
+  type: SortType;
 }
 
 @Component({
@@ -27,21 +38,31 @@ export interface ExtensionEvent {
 })
 export class FilterExtensionPanelComponent implements OnInit {
 
-  @Input()
-  private idPanel: string;
+  public items = [
+    {
+      id: 'title',
+      value: 'Название'
+    }
+  ];
 
   @Input()
-  private title: string;
+  public idPanel: string;
 
   @Input()
-  private opened: boolean;
+  public title: string;
+
+  @Input()
+  public opened: boolean;
 
   @Output()
-  private eventChange = new EventEmitter<ExtensionEvent>();
+  public eventChange = new EventEmitter<ExtensionEvent>();
 
-  private state = 'opened';
+  @Output()
+  public eventChangeSort = new EventEmitter<SortEvent>();
 
-  private sort: string = 'ASC';
+  public state = 'opened';
+
+  public sort: SortType = SortType.ASC;
 
   constructor() { }
 
@@ -60,10 +81,15 @@ export class FilterExtensionPanelComponent implements OnInit {
   }
 
   handleSortDestination(): void {
-    this.sort = this.sort === 'ASC' ? 'DESC' : 'ASC';
+    this.sort = this.sort === SortType.ASC ? SortType.DESC : SortType.ASC;
+    this.eventChangeSort.emit({field: this.items[0].id, type: this.sort } as SortEvent);
   }
 
   getIconSort(): string {
-    return this.sort === 'ASC' ? 'sort-up' : 'sort-down';
+    return this.sort === SortType.ASC ? 'sort-up' : 'sort-down';
+  }
+
+  handleChangeSort($event: Array<ItemSelect>) {
+    this.eventChangeSort.emit({field: $event[0].id, type: this.sort } as SortEvent);
   }
 }

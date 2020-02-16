@@ -1,6 +1,6 @@
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {OnDestroy, OnInit} from '@angular/core';
-import {Observable, ReplaySubject, Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {EntityCollectionService, EntityServices, QueryParams} from 'ngrx-data';
 import {MatDialog, PageEvent} from '@angular/material';
 import {MarketCatalogStore} from '../../store/market-catalog-store.module';
@@ -46,8 +46,6 @@ export interface FilterPage {
 
 export class AbstractProductController<T extends AbstractProduct> implements OnInit, OnDestroy {
 
-  private destroySubject: ReplaySubject<any> = new ReplaySubject<any>();
-
   constructor(protected activeRouting: ActivatedRoute,
               protected router: Router,
               protected entityServices: EntityServices,
@@ -59,11 +57,11 @@ export class AbstractProductController<T extends AbstractProduct> implements OnI
 
   protected subscription: Subscription = new Subscription();
 
-  protected products: Observable<T[]>;
-  protected service: EntityCollectionService<T>;
+  public products: Observable<T[]>;
+  public service: EntityCollectionService<T>;
 
-  protected paginationLength: Observable<number>;
-  protected category: string;
+  public paginationLength: Observable<number>;
+  public category: string;
 
   public pagination: Pagination;
   public filterPage: FilterPage;
@@ -85,11 +83,20 @@ export class AbstractProductController<T extends AbstractProduct> implements OnI
   }
 
   ngOnInit(): void {
-    this.products = this.service.entities$;
-
     const queryParamMap = this.activeRouting.snapshot.queryParamMap;
 
-    console.log(queryParamMap);
+    this.products = this.service.entities$;
+    const subscription = this.activeRouting.queryParamMap.subscribe(map => {
+      if (!this.filterPage || this.filterPage.filters.length === 0) {
+        this.initStatePage(map);
+      }
+    });
+
+    this.subscription.add(subscription);
+  }
+
+  initStatePage(queryParamMap: ParamMap) {
+    console.log('start loading');
     const page: number = parseInt(queryParamMap.get(PageQuery.PAGE), 10);
     const size: number = parseInt(queryParamMap.get(PageQuery.SIZE), 10);
 
@@ -98,6 +105,8 @@ export class AbstractProductController<T extends AbstractProduct> implements OnI
     this.navigate(this.pagination);
 
     this.category = queryParamMap.get('category');
+
+    console.log('loading by categoty: ', this.category);
 
     this.filterPage = AbstractProductController.getFilterPage(this.pagination, this.category);
 
@@ -119,12 +128,14 @@ export class AbstractProductController<T extends AbstractProduct> implements OnI
     this.paginationLength = this.serviceHttp.findByFilterCount(this.filterPage);
   }
 
-  protected handleChangePage($event: PageEvent) {
-    console.log('handleChangePage: ', $event);
+  handleChangePage($event: PageEvent) {
     this.pagination = AbstractProductController.getPagination($event.pageIndex, $event.pageSize);
 
-    this.navigate(this.pagination);
+    const {page, size} = this.pagination;
 
+    this.filterPage = { ...this.filterPage, page, size};
+
+    this.navigate(this.pagination);
 
     this.getPageByQuery(this.pagination, this.filterPage);
   }
@@ -132,8 +143,10 @@ export class AbstractProductController<T extends AbstractProduct> implements OnI
   getPageByQuery(pagination: Pagination, filterPage: FilterPage) {
     const {page, size} = pagination;
     this.pagination = { ... this.pagination, page, size };
-    this.products = this.serviceHttp.findByFilter(filterPage);
+    this.filterPage = { ... filterPage, page, size };
+
     this.requestPaginationLength();
+    this.products = this.serviceHttp.findByFilter(this.filterPage);
   }
 
   ngOnDestroy(): void {
@@ -149,7 +162,14 @@ export class AbstractProductController<T extends AbstractProduct> implements OnI
   handleClickDetails($event: string) {
     this.dialog.open(DialogProductInformationComponent, {
       data: {
-        animal: 'panda'
+        id: $event,
+        service: this.marketCatalogStore
+      },
+      width: '30%',
+      height: 'fit-content',
+      position: {
+        top: '0px',
+        left: '0px'
       }
     });
   }
@@ -157,8 +177,12 @@ export class AbstractProductController<T extends AbstractProduct> implements OnI
 
   handleChangeFilter($event: FilterEntity[]) {
     this.filterPage.filters = $event;
-    this.getPageByQuery(this.pagination, this.filterPage);
+    this.pagination = AbstractProductController.getPagination(0, 36);
+
+    this.navigate(this.pagination);
+
     this.requestPaginationLength();
+    this.getPageByQuery(this.pagination, this.filterPage);
   }
 
   handleFilter() {
@@ -166,7 +190,11 @@ export class AbstractProductController<T extends AbstractProduct> implements OnI
   }
 
   handleFilterReset() {
+    const pagination = AbstractProductController.getPagination(0, 36);
+    const filterPage = AbstractProductController.getFilterPage(pagination, this.filterPage.category, []);
 
+    this.getPageByQuery(pagination, filterPage);
   }
+
 
 }
