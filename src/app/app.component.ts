@@ -129,6 +129,7 @@ export class AppComponent implements OnInit {
         }
       }
     );
+
   }
 
   getChildCategory(): Observable<ProductCategory[]> {
@@ -151,6 +152,7 @@ export class AppComponent implements OnInit {
 
   handleSelectCategory(category: ProductCategory) {
     const recursiveParentCategory = this.getRecursiveParentCategory(category);
+    this.extensionMenu = false;
     this.routLink('product/' + recursiveParentCategory, category.id);
   }
 

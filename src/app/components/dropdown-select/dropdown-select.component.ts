@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {SelectionModel} from '@angular/cdk/collections';
 
-interface ItemSelect {
+export interface ItemSelect {
   id?: string;
   value: string;
 }
@@ -55,7 +55,7 @@ export class DropdownSelectComponent implements OnInit {
   public multiple: boolean = false;
 
   @Output()
-  protected eventChange: EventEmitter<Array<ItemSelect>> = new EventEmitter<Array<ItemSelect>>();
+  public eventChange: EventEmitter<Array<ItemSelect>> = new EventEmitter<Array<ItemSelect>>();
 
   @Input()
   set defaultNoneSelect(value: string) {
@@ -66,9 +66,9 @@ export class DropdownSelectComponent implements OnInit {
     }
   }
 
-  private state: string = 'closed';
+  public state: string = 'closed';
 
-  private opened: boolean = false;
+  public opened: boolean = false;
 
   constructor() { }
 

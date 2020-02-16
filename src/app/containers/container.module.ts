@@ -5,6 +5,7 @@ import {AngularMaterialModule} from '../angular-material/angular-material.module
 import {CommonModule} from '@angular/common';
 import {CommonComponentModule} from '../components/common-component.module';
 import {FilterCorniceComponent} from './filter-cornice/filter-cornice.component';
+import {NgxPipeModule} from "../pipes/ngx-pipe/ngx-pipe.module";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {FilterCorniceComponent} from './filter-cornice/filter-cornice.component'
   imports: [
     CommonModule,
     AngularMaterialModule,
-    CommonComponentModule
+    CommonComponentModule,
+    NgxPipeModule
   ],
   exports: [
     ProductCardComponent,

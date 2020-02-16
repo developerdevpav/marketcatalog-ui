@@ -1,9 +1,12 @@
 <div class="filter-box">
   <ng-template ngFor let-filterItem [ngForOf]="filter?.filters">
-    <extension-list multiple="true" (eventChange)="handle($event, filterItem)" [name]="filterItem.title" [items]="filterItem.values">
+    <extension-list multiple="true" (eventChange)="handle($event, filterItem)" [name]="filterItem.title"
+                    [items]="filterItem.values">
     </extension-list>
   </ng-template>
 
-  <button class="mb-3" mat-button style="width: 100%" (click)="handleFilterBtn($event)">Подобрать <span *ngIf="countFilterItem !== -1">{{countFilterItem}}</span></button>
-  <button mat-button style="width: 100%" (click)="handleFilterReset($event)" *ngIf="countFilterItem !== -1">Сбросить</button>
+  <div *ngIf="isShowReset()" style="width: 100%">
+    <button mat-button style="width: 100%" (click)="handleFilterReset($event)" *ngIf="countFilterItem !== -1">Сбросить</button>
+  </div>
+
 </div>

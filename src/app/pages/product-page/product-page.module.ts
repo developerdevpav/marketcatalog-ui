@@ -46,7 +46,8 @@ const routes: Routes = [
     CorniceProductPageComponent,
     JalosieProductPageComponent,
     AccessoryProductPageComponent,
-    ProductInformationComponent
+    ProductInformationComponent,
+    DialogProductInformationComponent
   ],
   imports: [
     CommonModule,
@@ -61,7 +62,8 @@ const routes: Routes = [
     CorniceHttpService,
     JalosieHttpService,
     AccessoryHttpService,
-    ProductInformationComponent,
+    ProductInformationComponent
+  ], entryComponents: [
     DialogProductInformationComponent
   ]
 })

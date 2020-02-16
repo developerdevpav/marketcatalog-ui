@@ -39,7 +39,7 @@ export class ExtensionListComponent implements OnInit {
 
   public search = '';
 
-  private state: string = 'closed';
+  public state: string = 'closed';
 
   @Input()
   public multiple: boolean = false;
