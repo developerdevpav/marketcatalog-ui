@@ -8,7 +8,7 @@ import {AbstractProductService} from './abstract.product.service';
 export class JalosieHttpService extends AbstractProductService<ProductJalosie> {
 
   constructor(http: HttpClient) {
-    super(http, '/api/jalosie-product');
+    super(http, '/api/jalousie-product');
   }
 
 }

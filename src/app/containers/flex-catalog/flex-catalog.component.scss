@@ -25,11 +25,12 @@
   &__body {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: start;
 
     &__content {
       flex-basis: 80%;
       display: grid;
+      height: fit-content;
       grid-template-columns: repeat(3, 1fr);
       grid-gap: 15px;
     }

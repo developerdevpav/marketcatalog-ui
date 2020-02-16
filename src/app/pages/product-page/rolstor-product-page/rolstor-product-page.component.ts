@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractProductController} from '../abstract.controller';
 import {HttpClient} from '@angular/common/http';
 import {RolstorHttpService} from '../service/rolstor-http.service';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'rolstor-product-page',
@@ -14,8 +15,8 @@ import {RolstorHttpService} from '../service/rolstor-http.service';
 export class RolstorProductPageComponent extends AbstractProductController<ProductRolstor> {
 
   constructor(entityServices: EntityServices, activeRouting: ActivatedRoute, router: Router,
-              http: HttpClient, serviceHttp: RolstorHttpService) {
-    super(activeRouting, router, entityServices, MarketCatalogStore.PRODUCT_ROLSTOR, serviceHttp);
+              http: HttpClient, serviceHttp: RolstorHttpService, dialog: MatDialog) {
+    super(activeRouting, router, entityServices, MarketCatalogStore.PRODUCT_ROLSTOR, serviceHttp, dialog);
   }
 
 }

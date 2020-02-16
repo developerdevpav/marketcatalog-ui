@@ -14,6 +14,7 @@ import {JalosieHttpService} from './service/jalosie-http.service';
 import {AccessoryHttpService} from './service/accessory-http.service';
 import {ProductInformationComponent} from '../product-information/product-information.component';
 import {AngularYandexMapsModule} from 'angular8-yandex-maps';
+import {DialogProductInformationComponent} from "../dialog-product-information/dialog-product-information.component";
 
 const routes: Routes = [
   {
@@ -60,7 +61,8 @@ const routes: Routes = [
     CorniceHttpService,
     JalosieHttpService,
     AccessoryHttpService,
-    ProductInformationComponent
+    ProductInformationComponent,
+    DialogProductInformationComponent
   ]
 })
 export class ProductPageModule {

@@ -39,10 +39,10 @@ export class FlexCatalogComponent implements OnInit, AfterViewInit, OnDestroy {
   public titlePage: string;
 
   @Input()
-  public length: number = 100;
+  public paginationSize: number = 100;
 
   @Input()
-  public pageSize: number = 100;
+  public paginationPage: number = 100;
 
   constructor() {
   }
@@ -62,7 +62,6 @@ export class FlexCatalogComponent implements OnInit, AfterViewInit, OnDestroy {
 
   handleEventGetDetails($event: string) {
     this.eventGetDetails.emit($event);
-    console.log($event);
   }
 
 }

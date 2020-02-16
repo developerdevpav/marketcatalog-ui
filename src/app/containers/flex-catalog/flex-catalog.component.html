@@ -24,7 +24,7 @@
   </div>
 
   <div class="flex-catalog__pagination container">
-    <pagination [size]="pageSize" [length]="length" (eventPageChange)="handleChangePage($event)"></pagination>
+    <pagination [page]="paginationPage" [size]="paginationSize" (eventPageChange)="handleChangePage($event)"></pagination>
   </div>
 
 </div>

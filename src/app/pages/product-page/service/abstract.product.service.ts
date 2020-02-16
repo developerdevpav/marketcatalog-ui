@@ -1,6 +1,7 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ProductCharacteristic} from "../../../store/domain/system/product.characteristic";
+import {ProductCharacteristic} from '../../../store/domain/system/product.characteristic';
+import {FilterPage} from '../abstract.controller';
 
 export class AbstractProductService<T extends AbstractProduct> {
 
@@ -20,6 +21,15 @@ export class AbstractProductService<T extends AbstractProduct> {
 
   findById(id: string): Observable<AbstractProduct> {
     return this.http.get(this.uri + '/' + id) as Observable<AbstractProduct>;
+  }
+
+  findByFilter(page: FilterPage): Observable<T[]> {
+    return this.http.post(this.uri + '/filter', page) as unknown as Observable<T[]>;
+  }
+
+  findByFilterCount(page: FilterPage): Observable<number> {
+    console.log(page);
+    return this.http.post(this.uri + '/filter/count', page) as Observable<number>;
   }
 
 

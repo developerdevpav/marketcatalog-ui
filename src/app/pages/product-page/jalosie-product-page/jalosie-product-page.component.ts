@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MarketCatalogStore} from '../../../store/market-catalog-store.module';
 import {AbstractProductController} from '../abstract.controller';
 import {JalosieHttpService} from '../service/jalosie-http.service';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'jalosie-product-page',
@@ -12,8 +13,8 @@ import {JalosieHttpService} from '../service/jalosie-http.service';
 })
 export class JalosieProductPageComponent extends AbstractProductController<ProductJalosie> {
 
-  constructor(entityServices: EntityServices, activeRouting: ActivatedRoute, router: Router, service: JalosieHttpService) {
-    super(activeRouting, router, entityServices, MarketCatalogStore.PRODUCT_JALOSIE, service);
+  constructor(entityServices: EntityServices, activeRouting: ActivatedRoute, router: Router, service: JalosieHttpService, dialog: MatDialog) {
+    super(activeRouting, router, entityServices, MarketCatalogStore.PRODUCT_JALOUSIE, service, dialog);
   }
 
 }

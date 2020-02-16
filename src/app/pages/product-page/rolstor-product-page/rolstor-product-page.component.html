@@ -1,9 +1,13 @@
 <flex-catalog [products]="(products | async)"
               (eventPageChange)="handleChangePage($event)"
-              [pageSize]="pageConf.size"
-              [length]="pageConf.total"
-              [loading]="loading"
+              [paginationPage]="pagination.page"
+              [paginationSize]="(paginationLength | async)"
               (eventGetDetails)="handleClickDetails($event)"
               [titlePage]="'Рольшторы'">
-  <filter-cornice [category]="category"></filter-cornice>
+  <filter-cornice [category]="category"
+                  [countFilterItem]="(paginationLength | async)"
+                  (eventFilterBtn)="handleFilter()"
+                  (eventChange)="handleChangeFilter($event)">
+  </filter-cornice>
+
 </flex-catalog>

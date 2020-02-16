@@ -1,9 +1,15 @@
 <flex-catalog [products]="(products | async)"
               (eventPageChange)="handleChangePage($event)"
-              [pageSize]="pageConf.size"
-              [length]="pageConf.total"
-              [loading]="loading"
+              [paginationSize]="pagination.size"
+              [paginationPage]="pagination.page"
               (eventGetDetails)="handleClickDetails($event)"
               [titlePage]="'Аксессуары и фурнитура для штор'">
-  <filter-cornice [category]="category"></filter-cornice>
+
+  <filter-cornice [category]="category"
+                  (eventFilterBtn)="handleFilter()"
+                  [countFilterItem]="(paginationLength | async)"
+                  (eventChange)="handleChangeFilter($event)"
+                  (eventFilterReset)="handleFilterReset()">
+  </filter-cornice>
+
 </flex-catalog>

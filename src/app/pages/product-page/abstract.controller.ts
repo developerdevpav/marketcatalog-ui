@@ -1,10 +1,11 @@
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
+import {Observable, ReplaySubject, Subscription} from 'rxjs';
 import {EntityCollectionService, EntityServices, QueryParams} from 'ngrx-data';
-import {PageEvent} from '@angular/material';
+import {MatDialog, PageEvent} from '@angular/material';
 import {MarketCatalogStore} from '../../store/market-catalog-store.module';
-import {AbstractProductService} from "./service/abstract.product.service";
+import {AbstractProductService} from './service/abstract.product.service';
+import {DialogProductInformationComponent} from '../dialog-product-information/dialog-product-information.component';
 
 export enum PageQuery {
   PAGE = 'page',
@@ -12,11 +13,17 @@ export enum PageQuery {
 }
 
 export interface Page {
-  category?: string[];
+  category?: string;
   page: number;
   size: number;
   total: number;
-  filters?: Filter[];
+  filters?: FilterEntity[];
+  isFilter: boolean;
+}
+
+export interface Pagination {
+  page: number;
+  size: number;
 }
 
 export enum FilterType {
@@ -24,119 +31,142 @@ export enum FilterType {
   FT = 'FT'
 }
 
-export interface Filter {
+export interface FilterEntity {
   id_charact: string;
   value: string[];
   type: FilterType;
 }
 
+export interface FilterPage {
+  category: string;
+  page: number;
+  size: number;
+  filters: FilterEntity[];
+}
+
 export class AbstractProductController<T extends AbstractProduct> implements OnInit, OnDestroy {
+
+  private destroySubject: ReplaySubject<any> = new ReplaySubject<any>();
+
+  constructor(protected activeRouting: ActivatedRoute,
+              protected router: Router,
+              protected entityServices: EntityServices,
+              protected marketCatalogStore: MarketCatalogStore,
+              protected serviceHttp: AbstractProductService<T>,
+              protected dialog: MatDialog) {
+    this.service = entityServices.getEntityCollectionService(marketCatalogStore);
+  }
 
   protected subscription: Subscription = new Subscription();
 
   protected products: Observable<T[]>;
   protected service: EntityCollectionService<T>;
 
+  protected paginationLength: Observable<number>;
   protected category: string;
 
-  protected loading: boolean = false;
+  public pagination: Pagination;
+  public filterPage: FilterPage;
 
-  protected pageConf: Page = {
-    category: [],
-    page: 0,
-    size: 36,
-    total: 0,
-    filters: []
-  };
+  static getPagination(page: number, size: number): Pagination {
+    return {
+      page: !!page ? Math.max(page, 0) : 0,
+      size: !!size ? Math.max(size, 0) : 36
+    };
+  }
 
-  constructor(protected activeRouting: ActivatedRoute,
-              protected router: Router,
-              protected entityServices: EntityServices,
-              protected marketCatalogStore: MarketCatalogStore,
-              protected serviceHttp: AbstractProductService<T>) {
-    this.service = entityServices.getEntityCollectionService(marketCatalogStore);
+  static getFilterPage(pagination: Pagination, category: string, filters: FilterEntity[] = []): FilterPage {
+    return {
+      category,
+      page: pagination.page,
+      size: pagination.size,
+      filters
+    };
   }
 
   ngOnInit(): void {
     this.products = this.service.entities$;
-    const subscriptionQueryParamMap = this.activeRouting.queryParamMap.subscribe(query => {
-      console.log('change by query: ', query);
-      this.ripperPageQuery(query);
-      this.navigate();
-      this.getPageByQuery(this.pageConf);
-    });
 
-    const subscriptionCount = this.getCount().subscribe(count => this.pageConf.total = count);
+    const queryParamMap = this.activeRouting.snapshot.queryParamMap;
 
-    const subscriptionLoading = this.service.loading$.subscribe(loading => this.loading = loading);
-    const subscriptionLoaded  = this.service.loaded$.subscribe(loading => this.loading = loading);
+    console.log(queryParamMap);
+    const page: number = parseInt(queryParamMap.get(PageQuery.PAGE), 10);
+    const size: number = parseInt(queryParamMap.get(PageQuery.SIZE), 10);
 
-    this.subscription.add(subscriptionQueryParamMap);
-    this.subscription.add(subscriptionCount);
-    this.subscription.add(subscriptionLoading);
-    this.subscription.add(subscriptionLoaded);
+    this.pagination = AbstractProductController.getPagination(page, size);
+
+    this.navigate(this.pagination);
+
+    this.category = queryParamMap.get('category');
+
+    this.filterPage = AbstractProductController.getFilterPage(this.pagination, this.category);
+
+    this.getPageByQuery(this.pagination, this.filterPage);
   }
 
-  ripperPageQuery(paramMap: ParamMap) {
-    const page: number = parseInt(paramMap.get(PageQuery.PAGE), 10);
-    const size: number = parseInt(paramMap.get(PageQuery.SIZE), 10);
-
-    if (page) {
-      this.pageConf.page = Math.max(page, 0);
-    }
-
-    if (size) {
-      this.pageConf.size = Math.max(size, 0);
-    }
-
-    const category = paramMap.get('category');
-
-    if (category) {
-      this.category = category;
-    }
-  }
-
-  protected navigate() {
+  protected navigate(pagination: Pagination) {
     this.router.navigate([], {
       relativeTo: this.activeRouting,
-      queryParams: { page: this.pageConf.page, size: this.pageConf.size },
+      queryParams: { page: pagination.page, size: pagination.size },
       queryParamsHandling: 'merge'
-    });
+    }).then(() => {})
+      .catch(errorNavigate => {
+        console.log(errorNavigate);
+      });
+  }
+
+  public requestPaginationLength() {
+    this.paginationLength = this.serviceHttp.findByFilterCount(this.filterPage);
   }
 
   protected handleChangePage($event: PageEvent) {
-    this.pageConf.page = $event.pageIndex;
-    this.pageConf.size = $event.pageSize;
+    console.log('handleChangePage: ', $event);
+    this.pagination = AbstractProductController.getPagination($event.pageIndex, $event.pageSize);
 
-    this.service.clearCache();
-    this.navigate();
-    this.getPageByQuery(this.pageConf);
+    this.navigate(this.pagination);
+
+
+    this.getPageByQuery(this.pagination, this.filterPage);
   }
 
-  getPageByQuery(pageConfig: Page) {
-    const {page, size} = pageConfig;
-    const queryParams = this.getQueryByObject({page, size});
-    this.service.getWithQuery(queryParams);
+  getPageByQuery(pagination: Pagination, filterPage: FilterPage) {
+    const {page, size} = pagination;
+    this.pagination = { ... this.pagination, page, size };
+    this.products = this.serviceHttp.findByFilter(filterPage);
+    this.requestPaginationLength();
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  getQueryByObject(obj: any): QueryParams {
+  private getQueryByObject(obj: any): QueryParams {
     const query: QueryParams = {};
     Object.keys(obj).forEach(confKey => query[confKey] = obj[confKey]);
     return query;
   }
 
-  getCount() {
-    return this.serviceHttp.getCount();
+  handleClickDetails($event: string) {
+    this.dialog.open(DialogProductInformationComponent, {
+      data: {
+        animal: 'panda'
+      }
+    });
   }
 
-  handleClickDetails($event: string) {
-    this.router.navigate([$event], {
-      relativeTo: this.activeRouting
-    });
+
+  handleChangeFilter($event: FilterEntity[]) {
+    this.filterPage.filters = $event;
+    this.getPageByQuery(this.pagination, this.filterPage);
+    this.requestPaginationLength();
+  }
+
+  handleFilter() {
+    this.products = this.serviceHttp.findByFilter(this.filterPage);
+  }
+
+  handleFilterReset() {
+
   }
 
 }

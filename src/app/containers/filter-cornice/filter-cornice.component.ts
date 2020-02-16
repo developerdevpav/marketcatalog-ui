@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Item} from '../../components/extension-list/extension-list.component';
 import {ProductCharacteristicService} from '../../pages/product-page/service/product-characteristic.service';
 import {FilterProductCharacteristic} from '../../store/domain/product-characteristic/product-characteristic';
+import {FilterEntity, FilterType} from "../../pages/product-page/abstract.controller";
 
 export interface Filter {
   filters: FilterItem[];
@@ -23,15 +24,26 @@ export class FilterCorniceComponent implements OnInit {
   long: Array<Item> = [];
 
   @Input()
+  countFilterItem: number;
+
+  @Input()
   filter: Filter;
 
   @Input()
   category: string;
 
-  @Output()
-  public eventChange = new EventEmitter<FilterItem>();
+  map: Map<string, FilterEntity> = new Map<string, FilterEntity>();
 
-  constructor(private productService: ProductCharacteristicService) { }
+  @Output()
+  public eventChange = new EventEmitter<FilterEntity[]>();
+  @Output()
+  public eventFilterBtn = new EventEmitter<any>();
+  @Output()
+  public eventFilterReset = new EventEmitter<any>();
+
+
+  constructor(private productService: ProductCharacteristicService) {
+  }
 
   ngOnInit() {
     if (this.category) {
@@ -67,6 +79,28 @@ export class FilterCorniceComponent implements OnInit {
   }
 
   handle($event: Array<Item>, filterItem: FilterItem) {
+    if (!$event || $event.length === 0) {
+      this.map.delete(filterItem.id);
+    } else {
+      this.map.set(filterItem.id,
+        {
+          id_charact: filterItem.id,
+          type: FilterType.EQ,
+          value: $event.map(it => it.value)
+        }
+      );
+    }
 
+    this.eventChange.emit(Array.from(this.map.values()));
+  }
+
+  handleFilterBtn($event: MouseEvent) {
+    this.eventFilterBtn.emit();
+  }
+
+  handleFilterReset($event: MouseEvent) {
+    this.map.clear();
+    this.eventChange.emit([]);
+    this.eventFilterReset.emit();
   }
 }

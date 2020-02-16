@@ -12,7 +12,7 @@ export class PaginationComponent implements OnInit {
   public eventPageChange: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
 
   @Input()
-  length: number = 20;
+  public page: number = 20;
 
   @Input()
   public size: number = 10;

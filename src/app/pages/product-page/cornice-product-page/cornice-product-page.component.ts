@@ -4,6 +4,7 @@ import {EntityServices} from 'ngrx-data';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MarketCatalogStore} from '../../../store/market-catalog-store.module';
 import {CorniceHttpService} from '../service/cornice-http.service';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'cornice-product-page',
@@ -12,8 +13,8 @@ import {CorniceHttpService} from '../service/cornice-http.service';
 })
 export class CorniceProductPageComponent extends AbstractProductController<ProductCornice> {
 
-  constructor(entityServices: EntityServices, activeRouting: ActivatedRoute, router: Router, service: CorniceHttpService) {
-    super(activeRouting, router, entityServices, MarketCatalogStore.PRODUCT_CORNICE, service);
+  constructor(entityServices: EntityServices, activeRouting: ActivatedRoute, router: Router, service: CorniceHttpService, dialog: MatDialog) {
+    super(activeRouting, router, entityServices, MarketCatalogStore.PRODUCT_CORNICE, service, dialog);
   }
 
 }
