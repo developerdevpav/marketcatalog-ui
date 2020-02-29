@@ -1,14 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {PageEvent} from '@angular/material';
 import {SortEvent, SortType} from '../../components/filter-extension-panel/filter-extension-panel.component';
 
@@ -18,9 +8,6 @@ import {SortEvent, SortType} from '../../components/filter-extension-panel/filte
   styleUrls: ['./flex-catalog.component.scss']
 })
 export class FlexCatalogComponent implements OnInit, AfterViewInit, OnDestroy {
-
-  @ViewChild('headerproduct', {static: true})
-  public headerproduct: ElementRef;
 
   public isFlow: boolean;
 
@@ -49,6 +36,9 @@ export class FlexCatalogComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input()
   public paginationPage: number = 100;
+
+  @Input()
+  public openFilter: boolean;
 
   constructor() {
   }

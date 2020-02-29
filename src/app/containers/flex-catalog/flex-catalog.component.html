@@ -1,41 +1,19 @@
-<div class="flex-catalog">
-  <div class="flex-catalog__header">
-    <div class="container" style="padding: 15px 0" [ngClass]="{'is-active': isFlow}">
-      <extension-panel (eventChangeSort)="handleSortEvent($event)"
-                       [title]="titlePage + (!!paginationSize ? ' (' +  paginationSize + ')' : '')" style="width: 100%;"></extension-panel>
-    </div>
+<div class="container" style="position: relative; height: max-content">
+  <div class="row position-sticky sticky-top" style="padding: 15px 15px" [ngClass]="{'is-active': isFlow}">
+    <extension-panel (eventChangeSort)="handleSortEvent($event)" [title]="titlePage + (!!paginationSize ? ' (' +  paginationSize + ')' : '')" style="width: 100%;"></extension-panel>
   </div>
-
-  <div class="container flex-catalog__body">
-    <div class="flex-catalog__loader" *ngIf="loading">
-      <loading></loading>
+  <div class="row">
+    <div class="col-md-3 col-12 d-xl-block d-none">
+      <div style="min-height: max-content" #headerproduct>
+        <ng-content></ng-content>
+      </div>
     </div>
-    <div class="flex-catalog__body__filter">
-      <ng-content></ng-content>
-    </div>
-    <div class="flex-catalog__body__content" *ngIf="!!products && products?.length !== 0">
-      <product-card
-        *ngFor="let item of products | sortCatalog:sortEvent"
-        [key]="item.id"
-        [avatarURL]="item.img"
-        [title]="item.title"
-        (eventClickDetails)="handleEventGetDetails($event)"
-        [titleActionBtn]="'Подробнее'">
-      </product-card>
-    </div>
-    <div *ngIf="!!products && products?.length === 0" style="flex-basis: 80%;">
-      <div class="col-12 mt-5 not-found-text">
-        По Вашему запросу ничего не найдено
+    <div class="col-md-9 col-12">
+      <div class="row">
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-6 col-12 mb-4" *ngFor="let item of products | sortCatalog:sortEvent">
+          <product-card [key]="item.id" [avatarURL]="item.img" [title]="item.title" (eventClickDetails)="handleEventGetDetails($event)" [titleActionBtn]="'Подробнее'"></product-card>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="flex-catalog__pagination container">
-    <mat-paginator [length]="paginationSize"
-                   [pageIndex]="paginationPage"
-                   [pageSize]="36"
-                   (page)="handleChangePage($event)">
-    </mat-paginator>
-  </div>
-
 </div>

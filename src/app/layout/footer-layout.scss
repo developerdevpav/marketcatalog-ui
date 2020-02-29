@@ -1,0 +1,88 @@
+.footer {
+  margin-top: 70px;
+  position: absolute;
+  width: 100%;
+  background: #3e2d8f;
+  bottom: 0;
+  left: 0;
+  color: white;
+  right: 0;
+  height: max-content;
+
+  .container {
+    box-shadow: 12px 0 10px -4px rgba(0, 0, 0, 0.1), -12px 0 10px -4px rgba(0, 0, 0, 0.1);
+
+    .row {
+      height: fit-content;
+
+      .contact-block {
+
+        .contact {
+
+          mat-icon {
+            color: white;
+            width: 32px;
+            height: 32px;
+          }
+
+          a {
+            color: white;
+            text-decoration: none;
+          }
+
+        }
+
+      }
+
+      .social {
+        height: 280px;
+
+        mat-icon {
+          color: white;
+          width: 50px;
+          height: 50px;
+        }
+      }
+
+    }
+  }
+
+
+}
+
+@media (max-width: 576px) {
+
+}
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+@include media-breakpoint-down(sm) {
+  .footer {
+    height: 90px;
+    bottom: 0;
+    left: 0;
+    color: white;
+    right: 0;
+
+    .container {
+      .row {
+        .contact-block {
+          display: none !important;
+
+          .contact {
+
+            height: 0;
+          }
+        }
+
+        .social {
+          height: max-content;
+          padding: 20px 0;
+        }
+
+      }
+    }
+  }
+}
