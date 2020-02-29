@@ -10,6 +10,11 @@ export class SortCatalogListPipe implements PipeTransform {
     const compare = sortEvent.type === SortType.ASC ?
       (a, b) => (a[sortEvent.field] > b[sortEvent.field] ? -1 : 1) :
       (a, b) => (a[sortEvent.field] < b[sortEvent.field] ? -1 : 1);
+
+    if (!values) {
+      return [];
+    }
+
     return values.sort(compare);
   }
 

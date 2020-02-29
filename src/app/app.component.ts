@@ -15,7 +15,7 @@ import {ProductInformation} from './pages/product-information/product-informatio
 })
 export class AppComponent implements OnInit {
 
-  styleSocIcon = {'width.px': '35', 'height.px': '35'};
+  styleSocIcon = {'width.px': '50', 'height.px': '50'};
   isFlowTopHeader = false;
 
   extensionMenu = false;
@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     images: [
       {
+        // tslint:disable-next-line:max-line-length
         url: 'https://asforos.by/upload/resize_cache/iblock/2d6/500_500_17236f3bb137eb253405d06e58cacf26c/2d680639b1cc829cce56faceb6ff5cb3.JPG'
       }
     ],
@@ -83,6 +84,9 @@ export class AppComponent implements OnInit {
       'phone',
       domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/phone.svg')
     ).addSvgIcon(
+      'email',
+      domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/email.svg')
+    ).addSvgIcon(
       'filter-icon',
       domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/filter.svg')
     ).addSvgIcon(
@@ -103,6 +107,15 @@ export class AppComponent implements OnInit {
     ).addSvgIcon(
       'sort-up',
       domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/sort_up.svg')
+    ).addSvgIcon(
+      'git-icon',
+      domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/git.svg')
+    ).addSvgIcon(
+      'instagram',
+      domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/soc/instagram.svg')
+    ).addSvgIcon(
+      'whatsapp',
+      domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/soc/whatsapp.svg')
     );
   }
 

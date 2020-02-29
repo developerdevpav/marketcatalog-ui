@@ -1,11 +1,9 @@
 <div class="wrapper">
   <header class="header">
     <div class="header-top container" [ngClass]="{'isFlow': isFlowTopHeader}">
-      <div class="header-top__left-menu row">
-        <a (click)="handleExtensionMenu()" routerLinkActive="isActive">Каталог товаров
-          <mat-icon>{{extensionMenu ? 'clear' : 'list'}}</mat-icon>
-        </a>
-      </div>
+      <a (click)="handleExtensionMenu()" routerLinkActive="isActive">Каталог товаров
+        <mat-icon>{{extensionMenu ? 'clear' : 'list'}}</mat-icon>
+      </a>
     </div>
   </header>
 
@@ -15,7 +13,8 @@
         <ul>
           <li *ngFor="let category of (getParentCategory() | async)"
               (mouseover)="handleMouseOver(category.id)" (click)="handleClickCategory(category)">
-            <div (click)="routLink('product/' + category.systemName, category.id)" [ngClass]="{'isActive': activeMenuItem === category.id}">
+            <div (click)="routLink('product/' + category.systemName, category.id)"
+                 [ngClass]="{'isActive': activeMenuItem === category.id}">
               {{category.title}}
             </div>
           </li>
@@ -37,38 +36,38 @@
   </section>
 
   <footer class="footer">
-    <div class="container footer__wrapper">
+    <div class="container">
       <div class="row">
-        <div class="col-12 footer-top">
-          <div class="row" style="padding: 30px 20px 30px 20px">
-            <div class="col-6 col-md-3 footer__contact">
-              <h4 class="footer__contact__title">Контакты</h4>
-              <a class="footer__contact__link" href="mailto:devpavdeveloper@gmail.com">
-                <mat-icon class="left-icon-href">email</mat-icon>
-                Han1390@rambler.ru
-              </a>
-              <a class="footer__contact__link" href="tel:+375 29 947-96-30">
-                <mat-icon class="left-icon-href">phone</mat-icon>
-                +375 (29) 718 90 51
-              </a>
-            </div>
-            <div class="col-12 col-md-6 footer__social">
-              <a [href]="'https://www.instagram.com/haaskes/?hl=ru'">
-                <svg-icon src="../assets/icon/soc/instagram.svg" [svgStyle]="styleSocIcon"></svg-icon>
-              </a>
-              <a href="https://api.whatsapp.com/send?phone=+375297189051">
-                <svg-icon src="../assets/icon/soc/whatsapp.svg" [svgStyle]="styleSocIcon"></svg-icon>
-              </a>
-            </div>
+        <div class="col-lg-4 col-md-6 p-md-5 flex-column d-none d-md-flex contact-block">
+          <h4>Контакты</h4>
+          <div class="d-flex flex-md-column mt-3 flex-sm-row contact">
+            <a class="d-flex align-items-center" href="mailto:devpavdeveloper@gmail.com">
+              <mat-icon class="left-icon-href">email</mat-icon>
+              <span>Han1390@rambler.ru</span>
+            </a>
+            <a class="d-flex align-items-center mt-4" href="tel:+375 29 947-96-30">
+              <mat-icon class="left-icon-href">phone</mat-icon>
+              <span>+375 (29) 718 90 51</span>
+            </a>
           </div>
         </div>
-        <div class="col-12 footer__copyright">
-          <div class="col-12 footer__copyright__text">
-            © (blowin) https://github.com/blowin (devpav) (https://github.com/devpav)
-          </div>
+        <div class="col-lg-4 col-md-6 col-12 social d-flex justify-content-center align-items-center">
+          <a class="mr-5" href="https://www.instagram.com/haaskes/?hl=ru">
+            <mat-icon svgIcon="instagram"></mat-icon>
+          </a>
+          <a class="mr-5 mr-md-0" href="https://api.whatsapp.com/send?phone=+375297189051">
+            <mat-icon svgIcon="whatsapp"></mat-icon>
+          </a>
+          <a class="mr-5 d-sm-flex d-md-none" href="mailto:devpavdeveloper@gmail.com">
+            <mat-icon svgIcon="email"></mat-icon>
+          </a>
+          <a class="d-sm-flex d-md-none" href="tel:+375 29 947-96-30">
+            <mat-icon svgIcon="phone"></mat-icon>
+          </a>
         </div>
       </div>
     </div>
   </footer>
+
 </div>
 
