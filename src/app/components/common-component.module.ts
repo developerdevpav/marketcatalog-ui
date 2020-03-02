@@ -11,10 +11,11 @@ import {FormsModule} from '@angular/forms';
 import {NgxPipeModule} from '../pipes/ngx-pipe/ngx-pipe.module';
 import {ChipComponent} from './chip/chip.component';
 import {ImageCarouselComponent} from './image-carousel/image-carousel.component';
+import {ExtensionMenuComponent} from './extension-menu/extension-menu.component';
 
 @NgModule({
   declarations: [PaginationComponent, LoaderComponent, FilterExtensionPanelComponent,
-    DropdownSelectComponent, ButtonComponent, ExtensionListComponent, ChipComponent, ImageCarouselComponent],
+    DropdownSelectComponent, ButtonComponent, ExtensionListComponent, ChipComponent, ImageCarouselComponent, ExtensionMenuComponent],
   exports: [
     PaginationComponent,
     LoaderComponent,
@@ -22,7 +23,8 @@ import {ImageCarouselComponent} from './image-carousel/image-carousel.component'
     DropdownSelectComponent,
     ExtensionListComponent,
     ChipComponent,
-    ImageCarouselComponent
+    ImageCarouselComponent,
+    ExtensionMenuComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,10 @@
+<mat-toolbar class="panel">
+  <mat-toolbar-row (click)="handleState()" class="panel__line flex-row justify-content-between align-items-center">
+    <span class="panel__title">{{props?.value}}</span>
+    <mat-icon *ngIf="extensible" class="panel__icon" [svgIcon]="state === 'closed' ? 'expansion' : 'unexpansion'"></mat-icon>
+  </mat-toolbar-row>
+
+  <div class="panel__extension" [@extension]="getState()" *ngIf="props?.children">
+    <extension-menu *ngFor="let it of props?.children" [props]="it" [extensible]="false"></extension-menu>
+  </div>
+</mat-toolbar>

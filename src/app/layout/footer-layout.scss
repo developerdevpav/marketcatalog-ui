@@ -50,13 +50,10 @@
 
 }
 
-@media (max-width: 576px) {
-
-}
-
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins/_breakpoints";
+
 
 @include media-breakpoint-down(sm) {
   .footer {

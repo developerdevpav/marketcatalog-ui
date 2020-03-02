@@ -1,73 +1,89 @@
-<div class="wrapper">
-  <header class="header">
-    <div class="header-top container" [ngClass]="{'isFlow': isFlowTopHeader}">
-      <a (click)="handleExtensionMenu()" routerLinkActive="isActive">Каталог товаров
-        <mat-icon>{{extensionMenu ? 'clear' : 'list'}}</mat-icon>
-      </a>
-    </div>
-  </header>
+<header class="header">
+  <div class="header-top container" [ngClass]="{'isFlow': isFlowTopHeader}">
+    <a (click)="drawer.toggle() " routerLinkActive="isActive">Каталог товаров
+      <mat-icon>{{drawer.opened ? 'clear' : 'list'}}</mat-icon>
+    </a>
+  </div>
+</header>
 
-  <section class="content">
-    <div class="catalog-product-menu container" *ngIf="extensionMenu">
-      <div class="catalog-product-menu__category">
-        <ul>
-          <li *ngFor="let category of (getParentCategory() | async)"
-              (mouseover)="handleMouseOver(category.id)" (click)="handleClickCategory(category)">
-            <div (click)="routLink('product/' + category.systemName, category.id)"
-                 [ngClass]="{'isActive': activeMenuItem === category.id}">
-              {{category.title}}
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="catalog-product-menu__subcategory">
-        <ul>
-          <li *ngFor="let category of (getChildCategory() | async)">
-            <div (click)="handleSelectCategory(category)">
-              {{category.title}}
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="content__body">
-      <router-outlet></router-outlet>
-    </div>
-  </section>
+<mat-drawer-container class="content" [hasBackdrop]="true">
+  <mat-drawer #drawer mode="over">
+    <extension-menu [extensible]="true" [props]="{value: 'Акссесуары', children: [ {value: 'For work'} ]}"></extension-menu>
+    <extension-menu [extensible]="true" [props]="{value: 'Карнизы', children: [ {value: 'Металлические' }, {value: 'Настенные' } ]}"></extension-menu>
+    <extension-menu [extensible]="true" [props]="{value: 'Акссесуары', children: [ {value: 'For work'} ]}"></extension-menu>
+    <extension-menu [extensible]="true" [props]="{value: 'Акссесуары', children: [ {value: 'For work'} ]}"></extension-menu>
+    <extension-menu [extensible]="true" [props]="{value: 'Акссесуары', children: [ {value: 'For work'} ]}"></extension-menu>
+    <extension-menu [extensible]="true" [props]="{value: 'Акссесуары', children: [ {value: 'For work'} ]}"></extension-menu>
+    <extension-menu [extensible]="true" [props]="{value: 'Акссесуары', children: [ {value: 'For work'} ]}"></extension-menu>
+    <extension-menu [extensible]="true" [props]="{value: 'Акссесуары', children: [ {value: 'For work'} ]}"></extension-menu>
+    <extension-menu [extensible]="true" [props]="{value: 'Акссесуары', children: [ {value: 'For work'} ]}"></extension-menu>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 col-md-6 p-md-5 flex-column d-none d-md-flex contact-block">
-          <h4>Контакты</h4>
-          <div class="d-flex flex-md-column mt-3 flex-sm-row contact">
-            <a class="d-flex align-items-center" href="mailto:devpavdeveloper@gmail.com">
-              <mat-icon class="left-icon-href">email</mat-icon>
-              <span>Han1390@rambler.ru</span>
-            </a>
-            <a class="d-flex align-items-center mt-4" href="tel:+375 29 947-96-30">
-              <mat-icon class="left-icon-href">phone</mat-icon>
-              <span>+375 (29) 718 90 51</span>
-            </a>
+<!--
+<section class="content">
+  <div class="catalog-product-menu container" *ngIf="extensionMenu">
+    <div class="catalog-product-menu__category">
+      <ul>
+        <li *ngFor="let category of (getParentCategory() | async)"
+            (mouseover)="handleMouseOver(category.id)" (click)="handleClickCategory(category)">
+          <div (click)="routLink('product/' + category.systemName, category.id)"
+               [ngClass]="{'isActive': activeMenuItem === category.id}">
+            {{category.title}}
           </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-12 social d-flex justify-content-center align-items-center">
-          <a class="mr-5" href="https://www.instagram.com/haaskes/?hl=ru">
-            <mat-icon svgIcon="instagram"></mat-icon>
+        </li>
+      </ul>
+    </div>
+    <div class="catalog-product-menu__subcategory">
+      <ul>
+        <li *ngFor="let category of (getChildCategory() | async)">
+          <div (click)="handleSelectCategory(category)">
+            {{category.title}}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="content__body">
+    <router-outlet></router-outlet>
+  </div>
+</section>
+-->
+
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 p-md-5 flex-column d-none d-md-flex contact-block">
+        <h4>Контакты</h4>
+        <div class="d-flex flex-md-column mt-3 flex-sm-row contact">
+          <a class="d-flex align-items-center" href="mailto:devpavdeveloper@gmail.com">
+            <mat-icon class="left-icon-href">email</mat-icon>
+            <span>Han1390@rambler.ru</span>
           </a>
-          <a class="mr-5 mr-md-0" href="https://api.whatsapp.com/send?phone=+375297189051">
-            <mat-icon svgIcon="whatsapp"></mat-icon>
-          </a>
-          <a class="mr-5 d-sm-flex d-md-none" href="mailto:devpavdeveloper@gmail.com">
-            <mat-icon svgIcon="email"></mat-icon>
-          </a>
-          <a class="d-sm-flex d-md-none" href="tel:+375 29 947-96-30">
-            <mat-icon svgIcon="phone"></mat-icon>
+          <a class="d-flex align-items-center mt-4" href="tel:+375 29 947-96-30">
+            <mat-icon class="left-icon-href">phone</mat-icon>
+            <span>+375 (29) 718 90 51</span>
           </a>
         </div>
       </div>
+      <div class="col-lg-4 col-md-6 col-12 social d-flex justify-content-center align-items-center">
+        <a class="mr-5" href="https://www.instagram.com/haaskes/?hl=ru">
+          <mat-icon svgIcon="instagram"></mat-icon>
+        </a>
+        <a class="mr-5 mr-md-0" href="https://api.whatsapp.com/send?phone=+375297189051">
+          <mat-icon svgIcon="whatsapp"></mat-icon>
+        </a>
+        <a class="mr-5 d-sm-flex d-md-none" href="mailto:devpavdeveloper@gmail.com">
+          <mat-icon svgIcon="email"></mat-icon>
+        </a>
+        <a class="d-sm-flex d-md-none" href="tel:+375 29 947-96-30">
+          <mat-icon svgIcon="phone"></mat-icon>
+        </a>
+      </div>
     </div>
-  </footer>
-
-</div>
+  </div>
+</footer>
 

@@ -16,8 +16,10 @@ import {
   MatProgressBarModule,
   MatProgressSpinnerModule,
   MatSelectModule,
+  MatSidenavModule,
   MatSnackBarModule,
-  MatTabsModule
+  MatTabsModule,
+  MatToolbarModule
 } from '@angular/material';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 
@@ -50,6 +52,7 @@ export class MatPaginatorIntlCro extends MatPaginatorIntl {
     MatTabsModule,
     MatListModule,
     MatIconModule,
+    MatSidenavModule,
     MatCheckboxModule,
     MatChipsModule,
     MatCardModule,
@@ -58,7 +61,8 @@ export class MatPaginatorIntlCro extends MatPaginatorIntl {
     MatMenuModule,
     AngularSvgIconModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatToolbarModule
   ],
   exports: [
     MatProgressBarModule,
@@ -68,6 +72,7 @@ export class MatPaginatorIntlCro extends MatPaginatorIntl {
     MatSelectModule,
     MatTabsModule,
     MatListModule,
+    MatSidenavModule,
     MatIconModule,
     MatCheckboxModule,
     MatChipsModule,
@@ -77,7 +82,8 @@ export class MatPaginatorIntlCro extends MatPaginatorIntl {
     MatMenuModule,
     AngularSvgIconModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatToolbarModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: MatPaginatorIntlCro }
