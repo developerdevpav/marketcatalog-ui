@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {EntityServices} from 'ngrx-data';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MarketCatalogStore} from '../../../store/market-catalog-store.module';
 import {AbstractProductController} from '../abstract.controller';
-import {AccessoryHttpService} from '../service/accessory-http.service';
+import {ProductAccessoryService} from '../../../store/services/product.accessory';
+import {MemoizedSelectorWithProps, Store} from '@ngrx/store';
+import {selectProductAccessoryPage} from '../../../store/selectors/product.accessory.selectors';
 
 @Component({
   selector: 'app-accessory-product-page',
@@ -12,8 +12,12 @@ import {AccessoryHttpService} from '../service/accessory-http.service';
 })
 export class AccessoryProductPageComponent extends AbstractProductController<ProductAccessory> {
 
-  constructor(entityServices: EntityServices, activeRouting: ActivatedRoute, router: Router, service: AccessoryHttpService) {
-    super(activeRouting, router, entityServices, MarketCatalogStore.PRODUCT_ACCESSORY, service);
+  constructor(store: Store<any>, activeRouting: ActivatedRoute, router: Router, service: ProductAccessoryService) {
+    super(activeRouting, router, store, service);
+  }
+
+  getSelectorPage(): MemoizedSelectorWithProps<any, any, any> {
+    return selectProductAccessoryPage;
   }
 
 }

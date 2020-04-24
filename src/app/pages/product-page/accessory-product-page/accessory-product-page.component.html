@@ -1,7 +1,6 @@
-<flex-catalog [products]="(products | async)"
+<flex-catalog [products]="(this.pageProduct | async)?.content"
+              [pageSize]="(this.pageProduct | async)?.size"
+              [length]="(this.pageProduct | async)?.total"
               (eventPageChange)="handleChangePage($event)"
-              [pageSize]="pageConf.size"
-              [length]="pageConf.total"
-              [loading]="loading"
               [titlePage]="'Аксессуары и фурнитура для штор'">
 </flex-catalog>

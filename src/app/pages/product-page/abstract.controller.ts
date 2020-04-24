@@ -1,10 +1,11 @@
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
-import {EntityCollectionService, EntityServices, QueryParams} from 'ngrx-data';
 import {PageEvent} from '@angular/material';
-import {MarketCatalogStore} from '../../store/market-catalog-store.module';
-import {RolstorHttpService} from './service/rolstor-http.service';
+import {AbstractService} from '../../store/services/abstract.service';
+import {Store} from '@ngrx/store';
+import {GetAccessoryPage} from '../../store/action/product/product.accessory.action';
+import {MemoizedSelectorWithProps} from '@ngrx/store/src/selector';
 
 export enum PageQuery {
   PAGE = 'page',
@@ -17,46 +18,35 @@ export interface Page {
   total: number;
 }
 
-export class AbstractProductController<T extends AbstractProduct> implements OnInit, OnDestroy {
+export abstract class AbstractProductController<T extends AbstractProduct> implements OnInit, OnDestroy {
 
   protected subscription: Subscription = new Subscription();
 
-  protected products: Observable<T[]>;
-  protected service: EntityCollectionService<T>;
+  protected pageProduct: Observable<Pageable<T>>;
+
+  protected currentPage: Pageable<T>;
 
   protected loading: boolean = false;
 
   protected pageConf: Page = {
     page: 0,
-    size: 35,
+    size: 12,
     total: 0
   };
 
-  constructor(protected activeRouting: ActivatedRoute,
-              protected router: Router,
-              protected entityServices: EntityServices,
-              protected marketCatalogStore: MarketCatalogStore,
-              protected serviceHttp: RolstorHttpService) {
-    this.service = entityServices.getEntityCollectionService(marketCatalogStore);
+  protected constructor(protected activeRouting: ActivatedRoute,
+                        protected router: Router,
+                        protected store: Store<any>,
+                        protected service: AbstractService<T>) {
   }
 
+
   ngOnInit(): void {
-    this.products = this.service.entities$;
-    const subscriptionQueryParamMap = this.activeRouting.queryParamMap.subscribe(query => {
-      this.ripperPageQuery(query);
-      this.navigate();
-      this.getPageByQuery(this.pageConf);
-    });
+    const paramMap = this.activeRouting.snapshot.paramMap;
 
-    const subscriptionCount = this.getCount().subscribe(count => this.pageConf.total = count);
-
-    const subscriptionLoading = this.service.loading$.subscribe(loading => this.loading = loading);
-    const subscriptionLoaded  = this.service.loaded$.subscribe(loading => this.loading = loading);
-
-    this.subscription.add(subscriptionQueryParamMap);
-    this.subscription.add(subscriptionCount);
-    this.subscription.add(subscriptionLoading);
-    this.subscription.add(subscriptionLoaded);
+    this.ripperPageQuery(paramMap);
+    this.navigate();
+    this.getPageByQuery(this.pageConf);
   }
 
   ripperPageQuery(paramMap: ParamMap) {
@@ -68,7 +58,7 @@ export class AbstractProductController<T extends AbstractProduct> implements OnI
     }
 
     if (size) {
-      this.pageConf.size = Math.max(size, 0);
+      this.pageConf.size = Math.max(size, 10);
     }
   }
 
@@ -84,29 +74,20 @@ export class AbstractProductController<T extends AbstractProduct> implements OnI
     this.pageConf.page = $event.pageIndex;
     this.pageConf.size = $event.pageSize;
 
-    this.service.clearCache();
     this.navigate();
     this.getPageByQuery(this.pageConf);
   }
 
   getPageByQuery(pageConfig: Page) {
     const {page, size} = pageConfig;
-    const queryParams = this.getQueryByObject({page, size});
-    this.service.getWithQuery(queryParams);
+    this.store.dispatch(new GetAccessoryPage(page, size));
+    this.pageProduct = this.store.select(this.getSelectorPage(), { pageIndex: page });
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  getQueryByObject(obj: any): QueryParams {
-    const query: QueryParams = {};
-    Object.keys(obj).forEach(confKey => query[confKey] = obj[confKey]);
-    return query;
-  }
-
-  getCount() {
-    return this.serviceHttp.getCount();
-  }
+  abstract getSelectorPage(): MemoizedSelectorWithProps<any, any, any>;
 
 }

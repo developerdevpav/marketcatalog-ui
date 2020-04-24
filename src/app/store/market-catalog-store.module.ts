@@ -3,8 +3,12 @@ import {CommonModule} from '@angular/common';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
-import {DefaultDataServiceConfig, EntityMetadataMap, NgrxDataModule} from 'ngrx-data';
-import {environment} from '../../environments/environment';
+import {DefaultDataServiceConfig, EntityMetadataMap} from 'ngrx-data';
+import {ProductCategoryService} from './services/product.category';
+import * as reducerFile from './index';
+import {ProductCategoryEffects} from './effects/product.category.effects';
+import {ProductAccessoryService} from './services/product.accessory';
+import {ProductAccessoryEffects} from './effects/product.accessory.effects';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
   root: 'api'
@@ -38,18 +42,19 @@ const pluralNames = {
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forRoot({}, {
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
+    StoreModule.forRoot(reducerFile.reducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
     }),
-    EffectsModule.forRoot([]),
-    environment.production ? [] : StoreDevtoolsModule.instrument(),
-    NgrxDataModule.forRoot({entityMetadata, pluralNames}),
+    EffectsModule.forRoot([
+      ProductCategoryEffects,
+      ProductAccessoryEffects
+    ]),
   ],
   providers: [
-    { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig }
+    ProductCategoryService,
+    ProductAccessoryService
   ]
 })
-export class MarketCatalogStoreModule { }
+export class MarketCatalogStoreModule {
+}

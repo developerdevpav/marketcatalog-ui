@@ -7,20 +7,23 @@ import {FilterExtensionPanelComponent} from './filter-extension-panel/filter-ext
 import {DropdownSelectComponent} from './dropdown-select/dropdown-select.component';
 import {ButtonComponent} from './button/button.component';
 import {ExtensionListComponent} from './extension-list/extension-list.component';
+import {TransformerProductCategoryMenuImagePipe} from '../pipes/transformer-product-category-menu-image.pipe';
 
 @NgModule({
   declarations: [PaginationComponent, LoaderComponent, FilterExtensionPanelComponent,
-    DropdownSelectComponent, ButtonComponent, ExtensionListComponent],
+    DropdownSelectComponent, ButtonComponent, ExtensionListComponent, TransformerProductCategoryMenuImagePipe],
   exports: [
     PaginationComponent,
     LoaderComponent,
     FilterExtensionPanelComponent,
     DropdownSelectComponent,
-    ExtensionListComponent
+    ExtensionListComponent,
+    TransformerProductCategoryMenuImagePipe
   ],
   imports: [
     CommonModule,
     AngularMaterialModule
   ]
 })
-export class CommonComponentModule { }
+export class CommonComponentModule {
+}

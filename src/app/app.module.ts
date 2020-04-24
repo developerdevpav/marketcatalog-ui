@@ -8,20 +8,22 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AngularMaterialModule} from './angular-material/angular-material.module';
 import {CommonComponentModule} from './components/common-component.module';
+import {ContainerModule} from './containers/container.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MarketCatalogStoreModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    AngularMaterialModule,
-    CommonComponentModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MarketCatalogStoreModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        AngularMaterialModule,
+        CommonComponentModule,
+        ContainerModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

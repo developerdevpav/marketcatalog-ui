@@ -7,3 +7,11 @@ interface AbstractProduct extends BaseEntity {
   img: string;
   category: string;
 }
+
+
+interface Pageable<T> {
+  content: T[];
+  total: number;
+  size: number;
+  page: number;
+}

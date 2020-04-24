@@ -213,7 +213,7 @@
     position: relative;
     flex-basis: 20%;
     font-size: 14px;
-    background: linear-gradient(90deg,#f7f7f7 50%,#f7f7f7 0);
+    background: linear-gradient(90deg, #f7f7f7 50%, #f7f7f7 0);
   }
 
   &__subcategory {
@@ -224,12 +224,14 @@
     line-height: 18px;
     color: #222;
     display: block;
-
+    padding: 40px;
+    min-height: 100vh;
 
     ul {
       li {
         height: 40px;
         opacity: .7;
+
         &:hover {
           color: black;
           opacity: 1;

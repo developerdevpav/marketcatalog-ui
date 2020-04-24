@@ -13,27 +13,18 @@
     <div class="catalog-product-menu" *ngIf="extensionMenu">
       <div class="catalog-product-menu__category">
         <ul>
-          <li *ngFor="let category of (getParentCategory() | async)"
-              (mouseover)="handleMouseOver(category.id)" (click)="handleClickCategory(category)">
-            <div [routerLink]="'product/' + category.systemName"
-                 [ngClass]="{'isActive': activeMenuItem === category.id}">
+          <li *ngFor="let category of (getParentCategories() | async)" (mouseover)="handleMouseOver(category)" (click)="handleClickCategory(category)">
+            <div [routerLink]="'product/' + category.systemName" [ngClass]="{'isActive': isActive(category)}">
               {{category.title}}
             </div>
           </li>
         </ul>
       </div>
       <div class="catalog-product-menu__subcategory">
-        <ul>
-          <li *ngFor="let category of (getChildCategory() | async)">
-            <div>
-              {{category.title}}
-            </div>
-          </li>
-        </ul>
+        <menu-image [items]="(currentChildren | async) | transformerMenuImageItem" (eventClick)="handleSelectCategory($event, currentChildren)"></menu-image>
       </div>
     </div>
     <div class="content__body">
-
       <router-outlet></router-outlet>
     </div>
   </section>

@@ -1,0 +1,8 @@
+<div class="menu-image-container">
+  <mat-card class="menu-image-container__item" *ngFor="let item of items" (click)="handleEventClick(item.id)">
+    <img mat-card-image [src]="item?.image" [alt]="item?.title">
+    <mat-card-content class="menu-image-container__item__title">
+      {{item.title}}
+    </mat-card-content>
+  </mat-card>
+</div>

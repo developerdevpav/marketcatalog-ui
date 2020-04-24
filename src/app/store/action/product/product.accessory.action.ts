@@ -1,33 +1,26 @@
 import {Action} from '@ngrx/store';
 
-export enum ActionTypeRolstor {
-  GET_CACHE = 'GET_CACHE',
-  GET_BACKEND = 'GET_BACKEND',
-  ADD_CACHE_MANY = 'ADD_CACHE_MANY'
+export enum ProductAccessoryActionType {
+  GET_ALL = 'GET_FROM_API SUCCESS [PRODUCT_ACCESSORY_ACTION_TYPE]',
+  GET_PAGE_ACCESSORY = 'GET SUCCESS [PRODUCT_ACCESSORY_ACTION_TYPE]',
+  GOT_SUCCESS_PRODUCT_ACCESSORY = 'FATAL [PRODUCT_ACCESSORY_ACTION_TYPE]',
 }
 
 
-export class GetCash implements Action {
-  readonly type = ActionTypeRolstor.GET_CACHE;
+export class GetAccessoryPage implements Action {
+
+  readonly type = ProductAccessoryActionType.GET_PAGE_ACCESSORY;
+
+  constructor(public pageIndex: number = 0, public pageSize: number = Number.MAX_VALUE) {}
+
 }
 
-export class GetBackend implements Action {
-  readonly type = ActionTypeRolstor.GET_BACKEND;
+export class GotSuccessPageAccessory implements Action {
+
+  readonly type = ProductAccessoryActionType.GOT_SUCCESS_PRODUCT_ACCESSORY;
+
+  constructor(public payload: Pageable<ProductAccessory>) {}
+
 }
 
-export class AddMany implements Action {
-  readonly type = ActionTypeRolstor.GET_BACKEND;
-  constructor(public payload: ProductRolstor[]) {}
-}
-
-
-/*
-export type AttractionActions =
-  LoadSuccessAttractions |
-  LoadAttractionById |
-  AddAttraction |
-  AddAttractions |
-  UpdateAttraction |
-  DeleteAttraction |
-  DeleteAttractions;
-*/
+export type ProductAccessoryType = GetAccessoryPage | GotSuccessPageAccessory;
