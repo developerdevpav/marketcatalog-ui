@@ -1,6 +1,8 @@
 import {createSelector} from '@ngrx/store';
 import * as selectorProductCategory from '../reducers/product.category.reducer';
 import {Dictionary} from '@ngrx/entity';
+import {Pageable} from '../domain/abstract.domain';
+import {ProductCategory} from '../domain/system/product.category';
 
 export const selectFirstProductCategoryPage = createSelector(
   selectorProductCategory.selectEntities,

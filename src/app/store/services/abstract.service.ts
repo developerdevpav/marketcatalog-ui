@@ -1,6 +1,7 @@
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Service} from './service';
 import {Observable} from 'rxjs';
+import {BaseEntity, Pageable} from '../domain/abstract.domain';
 
 export abstract class AbstractService<T extends BaseEntity> implements Service<T> {
 

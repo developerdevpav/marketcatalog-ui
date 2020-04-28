@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Item} from '../../components/extension-list/extension-list.component';
 
 export interface Filter {
@@ -20,87 +20,12 @@ export class FilterCorniceComponent implements OnInit {
 
   long: Array<Item> = [];
 
-  private filter: Filter = {
-    filters: [
-      {
-        id: 'uuid',
-        title: 'Тип карниза',
-        values: [
-          {
-            id: 'uuid',
-            value: 'Металический'
-          },
-          {
-            id: 'uuid',
-            value: 'Пластиковые потолочные'
-          },
-          {
-            id: 'uuid',
-            value: 'Настенные металлопластиковые'
-          },
-          {
-            id: 'uuid',
-            value: 'Гибкие'
-          },
-          {
-            id: 'uuid',
-            value: 'Комплектующие для потолочных'
-          },
-          {
-            id: 'uuid',
-            value: 'Металлопластиковая фурнитура'
-          },
-          {
-            id: 'uuid',
-            value: 'Комплектующие для металлических'
-          }
-        ]
-      },
-      {
-        id: 'uuid',
-        title: 'Цвет',
-        values: [
-          {
-            id: 'uuid',
-            value: 'Металический'
-          },
-          {
-            id: 'uuid',
-            value: 'Пластиковые потолочные'
-          },
-          {
-            id: 'uuid',
-            value: 'Настенные металлопластиковые'
-          },
-          {
-            id: 'uuid',
-            value: 'Гибкие'
-          },
-          {
-            id: 'uuid',
-            value: 'Комплектующие для потолочных'
-          },
-          {
-            id: 'uuid',
-            value: 'Металлопластиковая фурнитура'
-          },
-          {
-            id: 'uuid',
-            value: 'Комплектующие для металлических'
-          }
-        ]
-      }
-    ]
-  };
+  @Input()
+  private filters: Array<FilterItem>;
 
   constructor() { }
 
   ngOnInit() {
-    for (let i = 1; i < 10.0; i += 0.2000) {
-      this.long.push({
-        value: `${i}`
-      });
-    }
   }
 
   handle($event) {

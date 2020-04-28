@@ -1,15 +1,19 @@
-interface BaseEntity {
+export interface BaseEntity {
   id: string;
 }
 
-interface AbstractProduct extends BaseEntity {
+export interface AbstractProduct extends BaseEntity {
   title: string;
   img: string;
   category: string;
 }
 
+export enum DataType {
+  STRING = 'string',
+  DOUBLE = 'double'
+}
 
-interface Pageable<T> {
+export interface Pageable<T> {
   content: T[];
   total: number;
   size: number;

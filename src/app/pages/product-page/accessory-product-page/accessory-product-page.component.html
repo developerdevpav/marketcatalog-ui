@@ -3,4 +3,5 @@
               [length]="(this.pageProduct | async)?.total"
               (eventPageChange)="handleChangePage($event)"
               [titlePage]="'Аксессуары и фурнитура для штор'">
+  <filter-cornice [filters]="filters"></filter-cornice>
 </flex-catalog>

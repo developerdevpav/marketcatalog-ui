@@ -1,15 +1,6 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {PageEvent} from '@angular/material';
+import {AbstractProduct} from '../../store/domain/abstract.domain';
 
 @Component({
   selector: 'flex-catalog',

@@ -1,5 +1,5 @@
 <div class="filter-box">
-  <ng-template ngFor let-filterItem [ngForOf]="filter.filters">
+  <ng-template ngFor let-filterItem [ngForOf]="filters">
     <extension-list multiple="true" (eventChange)="handle($event)" [name]="filterItem.title" [items]="filterItem.values">
     </extension-list>
   </ng-template>

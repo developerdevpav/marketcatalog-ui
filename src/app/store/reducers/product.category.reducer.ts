@@ -1,6 +1,8 @@
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {ProductCategoryAction, ProductCategoryActionType} from '../action/system/product.category.action';
 import {createFeatureSelector} from '@ngrx/store';
+import {Pageable} from '../domain/abstract.domain';
+import {ProductCategory} from '../domain/system/product.category';
 
 export interface State extends EntityState<Pageable<ProductCategory>> {
 }

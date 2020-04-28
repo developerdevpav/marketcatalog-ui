@@ -1,1 +1,3 @@
-interface ProductJalosie extends AbstractProduct {}
+import {AbstractProduct} from '../abstract.domain';
+
+export interface ProductJalosie extends AbstractProduct {}

@@ -1,7 +1,7 @@
 .extension-panel {
   cursor: pointer;
   width: 100%;
-  padding: 0 -15px;
+  padding: 0;
 
   &__header-icon {
     font-size: 10px;
@@ -10,10 +10,9 @@
 
   &__header {
     font-family: Circe, sans-serif;
-    font-size: 18px;
-    color: #333;
+    font-size: 16px;
+    color: black;
     line-height: 1.556;
-    font-weight: bold;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
@@ -24,6 +23,7 @@
 
     span {
       font-size: 16px;
+      font-weight: 600;
     }
 
     &__sort-select-action {

@@ -1,4 +1,6 @@
 import {Action} from '@ngrx/store';
+import {Pageable} from '../../domain/abstract.domain';
+import {ProductAccessory} from '../../domain/product/product.accessory';
 
 export enum ProductAccessoryActionType {
   GET_ALL = 'GET_FROM_API SUCCESS [PRODUCT_ACCESSORY_ACTION_TYPE]',

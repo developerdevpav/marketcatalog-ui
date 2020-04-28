@@ -1,4 +1,5 @@
 import {Action} from '@ngrx/store';
+import {ProductRolstor} from '../../domain/product/product.rolstor';
 
 export enum ActionTypeRolstor {
   GET_CACHE = 'GET_CACHE',

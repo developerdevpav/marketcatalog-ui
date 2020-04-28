@@ -6,6 +6,10 @@ import {AbstractService} from '../../store/services/abstract.service';
 import {Store} from '@ngrx/store';
 import {GetAccessoryPage} from '../../store/action/product/product.accessory.action';
 import {MemoizedSelectorWithProps} from '@ngrx/store/src/selector';
+import {AbstractProduct, Pageable} from '../../store/domain/abstract.domain';
+import {GetFilterCharacteristicByCategory} from '../../store/action/system/filter.category.characteristic.action';
+import {FilterItem} from '../../containers/filter-cornice/filter-cornice.component';
+import {selectFilterByCategory} from '../../store/selectors/filter.characteristic.selectors';
 
 export enum PageQuery {
   PAGE = 'page',
@@ -26,6 +30,8 @@ export abstract class AbstractProductController<T extends AbstractProduct> imple
 
   protected currentPage: Pageable<T>;
 
+  protected filters: FilterItem[];
+
   protected loading: boolean = false;
 
   protected pageConf: Page = {
@@ -43,6 +49,19 @@ export abstract class AbstractProductController<T extends AbstractProduct> imple
 
   ngOnInit(): void {
     const paramMap = this.activeRouting.snapshot.paramMap;
+    const categoryId = this.activeRouting.snapshot.queryParams.category;
+
+    this.store.dispatch(new GetFilterCharacteristicByCategory(categoryId));
+
+    const subscriberFilterByCategory = this.store.select(selectFilterByCategory, { id: categoryId }).subscribe(filters => {
+      if (!filters) {
+        return;
+      }
+
+      this.filters = filters;
+    });
+
+    this.subscription.add(subscriberFilterByCategory);
 
     this.ripperPageQuery(paramMap);
     this.navigate();

@@ -1,4 +1,5 @@
 import {Observable} from 'rxjs';
+import {Pageable} from '../domain/abstract.domain';
 
 export interface Service<T> {
 

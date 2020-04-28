@@ -12,6 +12,8 @@ import {
   selectRootProductCategory
 } from './store/selectors/product.catagory.selectors';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ProductCategory} from './store/domain/system/product.category';
+import {Pageable} from './store/domain/abstract.domain';
 
 @Component({
   selector: 'app-root',
@@ -149,7 +151,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
       const foundParentCategorySubscriber = recursiveParentCategory.subscribe((foundCategory: ProductCategory) => {
         this.extensionMenu = false;
-        this.routLink('product/' + foundCategory.systemName, it.id);
+        this.routLink('product/' + foundCategory.systemName, foundCategory.id);
       });
 
       this.subscription.add(foundParentCategorySubscriber);

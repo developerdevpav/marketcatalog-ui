@@ -1,16 +1,17 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractProductController} from '../abstract.controller';
 import {ProductAccessoryService} from '../../../store/services/product.accessory';
 import {MemoizedSelectorWithProps, Store} from '@ngrx/store';
 import {selectProductAccessoryPage} from '../../../store/selectors/product.accessory.selectors';
+import {ProductAccessory} from '../../../store/domain/product/product.accessory';
 
 @Component({
   selector: 'app-accessory-product-page',
   templateUrl: './accessory-product-page.component.html',
   styleUrls: ['./accessory-product-page.component.scss']
 })
-export class AccessoryProductPageComponent extends AbstractProductController<ProductAccessory> {
+export class AccessoryProductPageComponent extends AbstractProductController<ProductAccessory> implements OnInit {
 
   constructor(store: Store<any>, activeRouting: ActivatedRoute, router: Router, service: ProductAccessoryService) {
     super(activeRouting, router, store, service);

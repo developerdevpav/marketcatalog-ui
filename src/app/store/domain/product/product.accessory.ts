@@ -1,1 +1,3 @@
-interface ProductAccessory extends AbstractProduct {}
+import {AbstractProduct} from '../abstract.domain';
+
+export interface ProductAccessory extends AbstractProduct {}

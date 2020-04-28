@@ -1,5 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import {MenuImageItem} from '../containers/menu-image/menu-image.component';
+import {ProductCategory} from '../store/domain/system/product.category';
 
 @Pipe({
   name: 'transformerMenuImageItem'

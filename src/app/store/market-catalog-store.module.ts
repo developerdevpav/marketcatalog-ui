@@ -9,6 +9,8 @@ import * as reducerFile from './index';
 import {ProductCategoryEffects} from './effects/product.category.effects';
 import {ProductAccessoryService} from './services/product.accessory';
 import {ProductAccessoryEffects} from './effects/product.accessory.effects';
+import {FilterCharacteristicService} from './services/filter.characteristic.service';
+import {FilterCharacteristicEffects} from './effects/filter.characteristic.effects';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
   root: 'api'
@@ -48,12 +50,14 @@ const pluralNames = {
     }),
     EffectsModule.forRoot([
       ProductCategoryEffects,
-      ProductAccessoryEffects
+      ProductAccessoryEffects,
+      FilterCharacteristicEffects
     ]),
   ],
   providers: [
     ProductCategoryService,
-    ProductAccessoryService
+    ProductAccessoryService,
+    FilterCharacteristicService
   ]
 })
 export class MarketCatalogStoreModule {

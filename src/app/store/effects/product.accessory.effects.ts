@@ -5,6 +5,8 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {ProductAccessoryService} from '../services/product.accessory';
 import {GetAccessoryPage, GotSuccessPageAccessory, ProductAccessoryActionType} from '../action/product/product.accessory.action';
+import {ProductAccessory} from '../domain/product/product.accessory';
+import {Pageable} from '../domain/abstract.domain';
 
 @Injectable()
 export class ProductAccessoryEffects {

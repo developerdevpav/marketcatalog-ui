@@ -1,4 +1,6 @@
 import {Action} from '@ngrx/store';
+import {Pageable} from '../../domain/abstract.domain';
+import {ProductCategory} from '../../domain/system/product.category';
 
 export enum ProductCategoryActionType {
   GET_ALL = 'GET_ALL SUCCESS [PRODUCT_CATEGORY_ACTION_TYPE]',
