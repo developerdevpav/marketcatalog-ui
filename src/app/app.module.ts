@@ -24,7 +24,7 @@ const API_KEY = '5557c22c-f442-4b3f-a5bb-2c4591e14201';
     BrowserAnimationsModule,
     AngularMaterialModule,
     CommonComponentModule,
-    AngularYandexMapsModule.forRoot(API_KEY)
+    // AngularYandexMapsModule.forRoot(API_KEY)
   ],
   providers: [],
   exports: [],
